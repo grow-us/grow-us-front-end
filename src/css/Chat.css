@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  background: linear-gradient(135deg, #180D59, #3C005E);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Outfit", sans-serif;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex; 
+  overflow: hidden;
+  position: relative;
+}
+
+
+.coluna-esq {
+  width: 300px; 
+  padding: 20px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #180D59; 
+  
+}
+.coluna-dir {
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column; 
+  background: linear-gradient(135deg, #180D59, #3C005E);
+  position: relative;
+  padding: 20px; 
+
+}
+
+.linha-vertical {
+  position: absolute;
+  top: 0;
+  left: 300px;
+  height: 100%;
+  width: 1px;
+  background-color: #96968C;
+  opacity: 0.5;
+  z-index: 5;
+}
+.linha-horizontal {
+  position: absolute;
+  top: 70px; 
+  left: 300px; 
+  height: 1px;
+  width: calc(100% - 300px); 
+  background-color: #96968C;
+  opacity: 0.5;
+  z-index: 5;
+}
+
+
+.logo-grupo {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+    margin-bottom: 25px; 
+}
+.img-logo svg {
+  width: 54px;
+  filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.9));
+  position: relative;
+  left: 35px;
+  bottom: 5px;
+}
+.logo {
+  font-size: 32px;
+  font-weight: 700;
+  color: #A100FF;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 1.5);
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #180D59; 
+    border-radius: 20px; 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    padding: 10px 15px; 
+    width: 100%; 
+    margin-bottom: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.search-bar .search-icon {
+    width: 20px;
+    height: 20px;
+    stroke: rgba(255, 255, 255, 0.5); 
+    margin-right: 12px;
+    flex-shrink: 0; 
+}
+.search-bar input {
+    border: none;
+    background: none;
+    outline: none; 
+    flex-grow: 1; 
+    color: #E0E0E0; 
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+}
+.search-bar input::placeholder {
+    color: rgba(255, 255, 255, 0.5); 
+}
+
+
+.conversation-list {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto; 
+    padding-bottom: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+.item:hover, .item.active {
+    background-color: rgba(255, 255, 255, 0.08); 
+}
+.icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #2d2578;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.text-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+.line {
+  width: 100%;
+  max-width: 160px;
+  height: 10px;
+  background-color: #5c5699;
+  border-radius: 10px;
+}
+.line.small {
+    max-width: 80px;
+    background-color: rgba(92, 86, 153, 0.6);
+}
+
+
+
+.header-chat {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    flex-shrink: 0; 
+}
+.user-info-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.icon-circle-header {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(150, 150, 140, 0.40);
+    border-radius: 50%;
+    position: relative;
+    bottom: 20px;
+}
+.icon-circle-header:hover {
+  transform: scale(1.1);
+}
+.icon-circle-header svg {
+  position: relative;
+  left: 22%;
+  top: 22%;
+}
+
+.texto-voltar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  bottom: 20px;
+}
+.texto1, .texto2 {
+  background-color: #888;
+  border-radius: 5px;
+  height: 12px;
+}
+.texto1 { width: 100px; }
+.texto2 { width: 60px; }
+
+.close-btn {
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  position: relative;
+  bottom: 20px;
+}
+.close-btn svg {
+  width: 40px;
+  height: 40px;
+}
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
+
+.message-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%; 
+}
+.message.received {
+    align-self: flex-start;
+    align-items: flex-start;
+    border-radius:  0px 12.994px 12.994px 12.994px;
+    background-color: white;
+}
+.message.sent {
+    align-self: flex-end;
+    align-items: flex-end;
+    border-radius:  12.994px 0px 12.994px 12.994px;
+    background-color: white;
+    
+}
+.message-content {
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+
+    background-color: rgba(150, 150, 140, 0.40); 
+    
+}
+.message.received .message-content {
+    background-color: rgba(150, 150, 140, 0.40); 
+    border-top-left-radius: 0;
+}
+.message.sent .message-content {
+    background-color: rgba(150, 150, 140, 0.40); 
+    border-top-right-radius: 0;
+}
+
+
+.line-mockup.large { width: 200px; }
+.line-mockup.medium { width: 200px; }
+.line-mockup.small { width: 150px; }
+.line-mockup.extra-small { width: 100px; }
+
+
+
+.chat-input-area {
+    height: 60px;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-bottom: 20px; 
+}
+.chat-input-area input {
+    flex-grow: 1;
+    height: 40px;
+    background-color: rgba(245, 245, 245, 0.75);
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12.994px 0px 0px 12.994px;
+    padding: 10px 10px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    gap: 0;
+    margin-right: -10px;
+}
+.chat-input-area input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+.attach-btn, .send-btn {
+    background-color: rgba(245, 245, 245, 0.75);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.attach-btn:hover {
+  transform: scale(1.1);
+}
+.send-btn {
+    background-color: white;
+    border-radius: 0 12.994px 12.994px 0;
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s;
+}
+.send-btn:hover {
+    transform: scale(1.1);
+}
+.attach-btn svg, .send-btn svg {
+    width: 20px;
+    height: 20px;
+}

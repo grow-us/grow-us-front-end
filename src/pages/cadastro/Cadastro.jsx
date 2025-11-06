@@ -41,7 +41,7 @@ export default function Cadastro() {
               <label htmlFor="email">Email Corporativo</label>
               <input type="email" id="email" placeholder="joao@accenture.com" />
 
-              <Link to="/cadastro-skills" className="btn-entrar">
+              <Link to="/Skills" className="btn-entrar">
                 Cadastre-se
               </Link>
             </form>

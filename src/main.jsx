@@ -6,6 +6,7 @@ import App from './App.jsx';
 import Cadastro from './pages/cadastro/Cadastro.jsx';
 import Login from './pages/login/Login.jsx';
 import Chat from './pages/chat/Chat.jsx';
+import Skills from './pages/cadastro/Skills.jsx';
 
 
 import './App.css';
@@ -19,6 +20,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/Skills" element={<Skills />} />
+
         
       </Routes>
     </BrowserRouter>

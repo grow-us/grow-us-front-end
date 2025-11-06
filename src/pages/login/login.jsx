@@ -39,7 +39,7 @@ export default function Login() {
 
             <form>
               <label htmlFor="email">Email Corporativo</label>
-              <input type="email" id="email" placeholder="joao@empresa.com" />
+              <input type="email" id="email" placeholder="joao@accenture.com" />
 
               <button type="submit" className="btn-entrar">Entrar</button>
             </form>

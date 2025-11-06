@@ -26,5 +26,6 @@ dist-ssr
 # Firebase cache
 .firebase/
 .firebaserc
+.firebase.json
 
 

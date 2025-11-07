@@ -148,6 +148,7 @@ position: absolute;
   outline: none;
   border-radius: 6px 0 0 6px;
   background: #d0d0d0;
+  color: #000;
   padding: 0 10px;
   font-size: 13px;
   position: relative;
@@ -166,26 +167,43 @@ position: absolute;
   left: 220px;
   bottom: 75px;
 }
-
 /* ===== Tags ===== */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px 30px;
+  gap: 12px;
   margin-bottom: 60px;
 }
 
 .tags span {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
   border-radius: 20px;
-  height: 22px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.85); /* Fundo sólido translúcido */
+  color: #000; /* Texto preto */
+  font-weight: 500;
+  font-size: 13px;
+  white-space: nowrap; /* Impede quebra de linha dentro da tag */
+  max-width: 100%; /* Impede overflow total */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Caso seja MUITO grande, adiciona "..." */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-/* Larguras variadas (para simular layout da imagem) */
-.tags span:nth-child(3n+1) { width: 70px; }
-.tags span:nth-child(3n+2) { width: 100px; }
-.tags span:nth-child(3n+3) { width: 90px; }
+.tags span:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Remove larguras fixas antigas */
+.tags span:nth-child(3n+1),
+.tags span:nth-child(3n+2),
+.tags span:nth-child(3n+3) {
+  width: auto;
+}
 
 /* ===== Botões ===== */
 .btn {
@@ -220,4 +238,20 @@ position: absolute;
 body, html {
   min-width: 1100px;
   overflow-x: hidden;
+}
+
+/* Botão para remover skill */
+.remove-btn {
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  color: #000;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #A100FF; /* Fica roxo ao passar o mouse */
 }

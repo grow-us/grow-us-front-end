@@ -15,7 +15,7 @@ export default function Cadastro() {
     e.preventDefault(); // evita o reload da página
 
     try {
-      const response = await fetch("https://us-central1-grow-us-1.cloudfunctions.net/app/cadastro", {
+      const response = await fetch("https://app-zxlyzt4g3q-uc.a.run.app/cadastrar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

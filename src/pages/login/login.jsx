@@ -16,7 +16,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://app-zxlyzt4g3q-uc.a.run.app/login", {
+      const response = await fetch("https://us-central1-grow-us-1.cloudfunctions.net/app/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

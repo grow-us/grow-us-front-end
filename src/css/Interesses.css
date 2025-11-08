@@ -1,5 +1,5 @@
 /* ===== Fundo e container principal ===== */
-.skills-body {
+.areas-body {
   background: linear-gradient(135deg, #180D59, #3C005E);
   display: flex;
   justify-content: center;
@@ -7,7 +7,7 @@
   height: 100vh;
 }
 
-.containerSkills {
+.containerAreas {
   width: 1100px;
   height: 620px;
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 /* ===== Cabeçalho do usuário ===== */
-.user-header {
+.user-header-areas {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -28,31 +28,31 @@
   left: 40px;
 }
 
-.avatar {
+.avatar-areas {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   background: #b0b0b0;
 }
 
-.user-info {
+.user-info-areas {
   display: flex;
   flex-direction: column;
 }
 
-.user-name {
+.user-name-areas {
   font-size: 20px;
   font-weight: 600;
   color: #fff;
 }
 
-.user-meta {
+.user-meta-areas {
   font-size: 16px;
   color: #bbb;
 }
 
 /* ===== Logo canto direito ===== */
-.logo-topo-direita {
+.logo-topo-direita-areas {
   position: absolute;
   top: 20px;
   right: 30px;
@@ -61,12 +61,11 @@
   gap: 1px;
 }
 
-.logo-topo-direita svg {
+.logo-topo-direita-areas svg {
   width: 60px;
-
 }
 
-.logo-text{
+.logo-text-areas{
 
       font-size: 32px;
   font-weight: 700;
@@ -76,7 +75,7 @@
 }
 
 /* ===== Seção de título e input ===== */
-.skills-section {
+.skills-section-areas {
   position: absolute;
   top: 120px;
   left: 120px; /* move mais à esquerda */
@@ -86,21 +85,21 @@
   text-align: left;
 }
 
-.title {
+.title-areas {
   font-size: 35px;
   font-weight: 700;
   color: #fff;
   margin-bottom: 5px;
 }
 
-.subtitle {
+.subtitle-areas {
   font-size: 13px;
   color: #ccc;
   margin-bottom: 20px;
 }
 
 /* ===== Input e botão ===== */
-.input-row.centralizada.deslocada {
+.input-row-areas.centralizada.deslocada {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -108,7 +107,7 @@
   transform: none;
 }
 
-.input-row.centralizada.deslocada input {
+.input-row-areas.centralizada.deslocada input {
   left: 400px;
   width: 350px;
   padding: 10px 14px;
@@ -117,18 +116,18 @@
   font-size: 15px;
 }
 
-.input-row.centralizada.deslocada button {
+.input-row-areas.centralizada.deslocada button {
   left: 400px;
   padding: 8px 14px;
-  background: #000;
-  color: white;
+  background: #ffffff;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 8px;
   cursor: pointer;
 }
 
 /* ===== Tags (centralizadas no meio da tela) ===== */
-.tags {
+.tags-areas {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -146,22 +145,22 @@
 }
 
 /* Scrollbar personalizada */
-.tags::-webkit-scrollbar {
+.tags-areas::-webkit-scrollbar {
   width: 8px;
 }
 
-.tags::-webkit-scrollbar-track {
+.tags-areas::-webkit-scrollbar-track {
   background: #2b2b2b;
   border-radius: 10px;
 }
 
-.tags::-webkit-scrollbar-thumb {
+.tags-areas::-webkit-scrollbar-thumb {
   background-color: #A100FF;
   border-radius: 10px;
 }
 
 /* Aparência das tags */
-.tags span {
+.tags-areas span {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -179,13 +178,13 @@
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.tags span:hover {
+.tags-areas span:hover {
   transform: scale(1.05);
   background: rgba(255, 255, 255, 1);
 }
 
 /* Botão de remoção das tags */
-.remove-btn {
+.remove-btn-areas {
   margin-left: 8px;
   background: transparent;
   border: none;
@@ -196,12 +195,12 @@
   transition: color 0.2s ease;
 }
 
-.remove-btn:hover {
+.remove-btn-areas:hover {
   color: #A100FF;
 }
 
 /* ===== Botões inferiores ===== */
-.btn {
+.btn-areas {
   position: absolute;
   bottom: 40px;
   height: 40px;
@@ -213,7 +212,7 @@
 }
 
 /* Botão Voltar */
-.btn.back {
+.btn-areas.back {
   left: 450px;
   background: none;
   color: #fff;
@@ -221,7 +220,7 @@
 }
 
 /* Botão Confirmar */
-.btn.confirm {
+.btn-areas.confirm {
   right: 400px;
   width: 130px;
   background: #A100FF;

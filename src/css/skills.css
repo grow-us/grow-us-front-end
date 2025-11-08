@@ -158,14 +158,17 @@ position: absolute;
 .input-row button {
   width: 36px;
   height: 32px;
+  background: #ffffff;
+  color: rgb(0, 0, 0);
   border: none;
-  background: #d0d0d0;
-  border-radius: 0 6px 6px 0;
+  border-radius: 8px;
   cursor: pointer;
   position: relative;
-  left: 220px;
+  left: 225px;
   bottom: 75px;
 }
+
+
 /* ===== Tags ===== */
 .tags {
   display: flex;

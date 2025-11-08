@@ -29,6 +29,10 @@ export default function Home() {
       <Link to="/skills" className="voltar">
         SKILLS
       </Link>
+
+      <Link to="/interesses" className="voltar">
+        INTERESSES
+      </Link>
     </div>
   );
 }

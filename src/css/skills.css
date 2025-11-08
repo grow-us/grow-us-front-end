@@ -107,10 +107,12 @@ position: absolute;
     order: 2;
 }
 .image_logo svg {
+  margin-right: -20px;
     display: block;
-    width: 70px; height: 70px;
+    width: 98px;
+    height: auto;
     filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
-    margin-top: -65%;
+    margin-top: -55%;
     margin-left: -35%;
 }
 

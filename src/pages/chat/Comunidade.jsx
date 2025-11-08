@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../../css/Chat.css';
-import Logo from '../../componetes/Logo'
-import Anexo from '../../componetes/Anexo'
-import Send from '../../componetes/Send'
+import '../../css/Comunidade.css';
+import Logo from '../../componetes/Logo';
+import Anexo from '../../componetes/Anexo';
+import Send from '../../componetes/Send';
 
-
-
-export default function Chat() {
+export default function Comunidade() {
   const [messages, setMessages] = useState([
     { type: 'received', text: 'Olá! Tudo bem?' },
     { type: 'sent', text: 'Oi! Tudo ótimo e você?' },
@@ -37,7 +35,6 @@ export default function Chat() {
   // 🤖 Resposta automática
   const gerarRespostaAutomatica = (msg) => {
     const lower = msg.toLowerCase();
-
     if (lower.includes('oi') || lower.includes('olá')) return 'Oi! 😊 Como posso ajudar?';
     if (lower.includes('tudo bem')) return 'Tudo ótimo, e você?';
     if (lower.includes('obrigado')) return 'De nada! 😄';
@@ -61,33 +58,24 @@ export default function Chat() {
     reader.onload = (event) => {
       let newMessage;
 
-      // Se for imagem (jpg/png/gif/webp)
       if (fileType.startsWith('image/')) {
         newMessage = {
           type: 'sent',
           image: event.target.result,
           fileName: file.name,
         };
-      }
-      // Se for PDF
-      else if (fileType === 'application/pdf') {
+      } else if (fileType === 'application/pdf') {
         newMessage = {
           type: 'sent',
           pdf: event.target.result,
           fileName: file.name,
         };
-      }
-      // Caso contrário, só mostra o nome do arquivo
-      else {
-        newMessage = {
-          type: 'sent',
-          text: `📎 Enviado: ${file.name}`,
-        };
+      } else {
+        newMessage = { type: 'sent', text: `📎 Enviado: ${file.name}` };
       }
 
       setMessages((prev) => [...prev, newMessage]);
 
-      // Simula resposta automática
       setTimeout(() => {
         setMessages((prev) => [
           ...prev,
@@ -96,25 +84,22 @@ export default function Chat() {
       }, 1000);
     };
 
-    reader.readAsDataURL(file); // lê o arquivo em base64
+    reader.readAsDataURL(file);
   };
 
-  // Rolagem automática
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   return (
-<div className="container">
-  <div className="coluna-esq">
-
-    {/* 👇 CORREÇÃO AQUI 👇 */}
-    <div className="logo-grupo">
-      <div className="img-logo">
-        <Logo color="black" size={22} />
-      </div>
-      <span className="logo">Grow Us</span>
-    </div>
+    <div className="container">
+      <div className="coluna-esq">
+        <div className="logo-grupo">
+          <div className="img-logo">
+            <Logo color="black" size={22} />
+          </div>
+          <span className="logo">Grow Us</span>
+        </div>
 
         <div className="search-bar">
           <svg
@@ -132,7 +117,7 @@ export default function Chat() {
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
-          <input type="text" placeholder="Procurar conversas" />
+          <input type="text" placeholder="Procurar Comunidades" />
         </div>
 
         <div className="conversation-list">
@@ -153,16 +138,16 @@ export default function Chat() {
       </div>
 
       <div className="coluna-dir">
-        <div className="header-chat">
-          <div className="user-info-header">
-            <div className="icon-circle-header">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+        {/* HEADER CENTRALIZADO */}
+        <div className="header-chat-comunidade">
+          <div className="user-info-header-comunidade centered">
+            <div className="icon-circle-header-comunidade">
+              <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 22 22" fill="none">
                 <path stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <div className="texto-voltar">
-              <div className="texto1">Conversa</div>
-              <div className="texto2">Ativa</div>
+            <div className="texto-voltar-comunidade">
+              <div className="texto1">Comunidade Grow Us</div>
             </div>
           </div>
         </div>
@@ -170,23 +155,15 @@ export default function Chat() {
         <div className="message-area">
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.type}`}>
-              {/* 📄 Se for PDF */}
               {msg.pdf ? (
-                <a
-                  href={msg.pdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pdf-link"
-                >
+                <a href={msg.pdf} target="_blank" rel="noopener noreferrer" className="pdf-link">
                   📄 {msg.fileName}
                 </a>
               ) : msg.image ? (
-                /* 🖼️ Se for imagem */
                 <div className="image-message">
                   <img src={msg.image} alt={msg.fileName} />
                 </div>
               ) : (
-                /* 💬 Mensagem normal */
                 <div className="message-content">{msg.text}</div>
               )}
             </div>
@@ -195,15 +172,10 @@ export default function Chat() {
         </div>
 
         <div className="chat-input-area">
-          {/* 📎 Botão de Anexo */}
           <button className="attach-btn" onClick={handleAttachClick}>
-
-              <Anexo color="black" size={22} />
-
-
+            <Anexo color="black" size={22} />
           </button>
 
-          {/* Input oculto */}
           <input
             type="file"
             ref={fileInputRef}
@@ -212,7 +184,6 @@ export default function Chat() {
             onChange={handleFileChange}
           />
 
-          {/* Campo de texto */}
           <input
             type="text"
             placeholder="Escreva uma mensagem..."
@@ -221,9 +192,8 @@ export default function Chat() {
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           />
 
-          {/* ✈️ Botão de envio */}
           <button className="send-btn" onClick={handleSend}>
-              <Send color="black" size={22} />
+            <Send color="black" size={22} />
           </button>
         </div>
       </div>

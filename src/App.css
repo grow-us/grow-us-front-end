@@ -20,15 +20,31 @@
       padding: 20px 60px;
     }
 
-    .img-top svg {
-      width: 90px;
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+
+.logo-inicio {
+  font-size: 32px;
+  font-weight: 700;
+  color: #A100FF;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+}
+
+.img-top svg {
+    margin-right: -40px; /* aproxima ainda mais o texto */
+
+      width: 120px;
       height: auto;
       transition: transform 0.3s ease;
-    }
+}
 
-    .img-top svg:hover {
-      transform: scale(1.05);
-    }
+.img-top svg:hover {
+  transform: scale(1.05);
+}
+
 
     .div-top {
       display: flex;

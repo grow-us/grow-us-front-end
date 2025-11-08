@@ -322,3 +322,61 @@
   text-decoration: underline;
 }
 
+
+
+
+/* HEADER FIXO E CENTRALIZADO */
+.header-chat-comunidade {
+  position: sticky; /* fica fixo no topo da coluna direita */
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px; /* altura fixa para evitar que diminua */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #180D59, #3C005E); /* mantém o fundo */
+  flex-shrink: 0;
+}
+
+.user-info-header-comunidade.centered {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.icon-circle-header-comunidade {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.texto-voltar-comunidade .texto1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFF;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+}
+
+/* Remove qualquer status */
+.texto-voltar-comunidade .texto2 {
+  display: none;
+}
+
+/* Garante que a área de mensagens não suba por baixo do header */
+.message-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 0 10px 0; /* aumenta o espaçamento no topo */
+  margin-top: 0;
+}
+
+

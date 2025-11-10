@@ -98,7 +98,7 @@ export default function Comunidade() {
           <div className="img-logo">
             <Logo color="black" size={22} />
           </div>
-          <span className="logo">Grow Us</span>
+          <span className="logo-chat">Grow Us</span>
         </div>
 
         <div className="search-bar">

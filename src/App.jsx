@@ -14,7 +14,7 @@ export default function App() {
           <div className="img-top">
           <Logo color="black" size={22} />
           </div>
-          <div className="logo-inicio">GrowUs</div>
+          <div className="logo-inicio">Grow Us</div>
         </div>
 
         <nav className="div-top">

@@ -27,6 +27,7 @@
 
 
 .logo-inicio {
+  margin-left: 10px;
   font-size: 32px;
   font-weight: 700;
   color: #A100FF;
@@ -34,6 +35,8 @@
 }
 
 .img-top svg {
+    filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.8));
+
 
       width: 50px;
       height: auto;

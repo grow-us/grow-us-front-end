@@ -27,7 +27,8 @@
 
 
 .logo-inicio {
-  margin-left: 10px;
+    margin-left:-15px;
+  margin-top: 10px;
   font-size: 32px;
   font-weight: 700;
   color: #A100FF;

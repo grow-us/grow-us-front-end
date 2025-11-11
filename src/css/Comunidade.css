@@ -63,6 +63,8 @@
 
 }
 .logo {
+    margin-left:-32px;
+  margin-top: 10px;
   font-size: 32px;
   font-weight: 700;
   color: #A100FF;

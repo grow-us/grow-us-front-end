@@ -113,7 +113,7 @@ export default function Chat() {
       <div className="img-logo">
         <Logo color="black" size={22} />
       </div>
-      <span className='logo-chat'>Grow Us</span>
+        <span className="logo-chat" translate="no">GrowUS</span>
     </div>
 
         <div className="search-bar">

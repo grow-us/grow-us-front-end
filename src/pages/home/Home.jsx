@@ -1,10 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../../css/Home.css";
 import Logo from "../../componetes/Logo";
 import Send from "../../componetes/Send";
 import { 
   FaImage, FaRegHeart, FaShare, FaRegBookmark, 
-  FaRegCommentDots, FaBell, FaBars, FaSearch, 
+  FaRegCommentDots, FaBell, FaBars, 
   FaChevronLeft, FaChevronRight 
 } from 'react-icons/fa';
 
@@ -12,21 +12,51 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
+  const [eventos, setEventos] = useState([]);
+  const [currentEvento, setCurrentEvento] = useState(0);
   const fileInputRef = useRef(null);
-
   const [currentDate, setCurrentDate] = useState(new Date());
   const today = new Date();
+
+  // 🔹 Buscar eventos na API
+  useEffect(() => {
+    const fetchEventos = async () => {
+      try {
+        const response = await fetch("https://app-zxlyzt4g3q-uc.a.run.app/eventos");
+        if (!response.ok) throw new Error("Erro ao buscar eventos");
+        const data = await response.json();
+        setEventos(data);
+      } catch (error) {
+        console.error("Erro ao carregar eventos:", error);
+      }
+    };
+    fetchEventos();
+  }, []);
+
+  const formatarData = (isoString) => {
+    try {
+      const data = new Date(isoString);
+      return data.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch {
+      return "Data inválida";
+    }
+  };
 
   const getCalendarDays = (date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
-
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
     const startDay = firstDay.getDay();
-
     const prevMonthLastDay = new Date(year, month, 0).getDate();
+
     const prevDays = Array.from({ length: startDay }, (_, i) => ({
       day: prevMonthLastDay - startDay + i + 1,
       current: false
@@ -47,9 +77,7 @@ export default function Home() {
     return [...prevDays, ...currentDays, ...nextDays];
   };
 
-  const handleAttachClick = () => {
-    fileInputRef.current.click();
-  };
+  const handleAttachClick = () => fileInputRef.current.click();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -72,6 +100,19 @@ export default function Home() {
     setPosts((prev) => [newPost, ...prev]);
     setInputValue("");
     setImagePreview(null);
+  };
+
+  // 🔹 Navegar entre os eventos
+  const nextEvento = () => {
+    if (eventos.length > 0) {
+      setCurrentEvento((prev) => (prev + 1) % eventos.length);
+    }
+  };
+
+  const prevEvento = () => {
+    if (eventos.length > 0) {
+      setCurrentEvento((prev) => (prev - 1 + eventos.length) % eventos.length);
+    }
   };
 
   return (
@@ -184,11 +225,7 @@ export default function Home() {
           <FaBars className="icon" />
         </header>
 
-        <div className="search-bar">
-          <FaSearch className="icon-search" />
-          <input type="text" placeholder="Buscar" />
-        </div>
-
+        {/* 🔹 Calendário */}
         <div className="widget card">
           <h3>Calendário</h3>
           <div className="calendar-header">
@@ -224,9 +261,7 @@ export default function Home() {
               return (
                 <div
                   key={i}
-                  className={`cal-day ${d.current ? "current-month" : "other-month"} ${
-                    isToday ? "today" : ""
-                  }`}
+                  className={`cal-day ${d.current ? "current-month" : "other-month"} ${isToday ? "today" : ""}`}
                 >
                   {d.day}
                 </div>
@@ -235,19 +270,37 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="widget card">
+        {/* 🔹 Eventos Próximos (Um por vez com setas) */}
+        <div className="widget card eventos-proximos">
           <h3>Eventos Próximos</h3>
           <div className="event-item">
-            <div className="line-short"></div>
-            <div className="line-long"></div>
-            <div className="line-long"></div>
+            {eventos.length === 0 ? (
+              <p>Carregando eventos...</p>
+            ) : (
+              <div className="evento-card">
+                <img
+                  src={eventos[currentEvento].img}
+                  alt={eventos[currentEvento].titulo}
+                  className="evento-img"
+                />
+                <div className="evento-info">
+                  <strong>{eventos[currentEvento].titulo}</strong>
+                  <p>{formatarData(eventos[currentEvento].dia)}</p>
+                  <p>{eventos[currentEvento].localidade}</p>
+                </div>
+              </div>
+            )}
           </div>
+
           <div className="event-nav">
-            <FaChevronLeft className="nav-arrow" />
-            <span className="nav-dot active"></span>
-            <span className="nav-dot"></span>
-            <span className="nav-dot"></span>
-            <FaChevronRight className="nav-arrow" />
+            <FaChevronLeft className="nav-arrow" onClick={prevEvento} />
+            {eventos.map((_, i) => (
+              <span
+                key={i}
+                className={`nav-dot ${i === currentEvento ? "active" : ""}`}
+              ></span>
+            ))}
+            <FaChevronRight className="nav-arrow" onClick={nextEvento} />
           </div>
         </div>
       </aside>

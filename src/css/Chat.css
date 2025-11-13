@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* COLUNA ESQUERDA */
+.coluna-esq {
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #180D59;
+  flex-shrink: 0;
+}
+
+/* COLUNA DIREITA */
+.coluna-dir {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #180D59, #3C005E);
+  padding: 20px;
+  position: relative;
+}
+
+.linha-vertical {
+  position: absolute;
+  top: 0;
+  left: 300px;
+  height: 100%;
+  width: 1px;
+  background-color: rgba(255,255,255,0.2);
+  z-index: 5;
+}
+
+.linha-horizontal {
+  position: absolute;
+  top: 70px;
+  left: 300px;
+  height: 1px;
+  width: calc(100% - 300px);
+  background-color: rgba(255,255,255,0.2);
+  z-index: 5;
+}
+
+/* LOGO */
+.logo-grupo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+.img-logo svg {
+  width: 54px;
+  filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.8));
+
+}
+.logo-chat {
+
+
+  margin-left:-32px;
+  margin-top: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #A100FF;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+}
+
+/* BARRA DE PESQUISA */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #1E146F;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 15px;
+  width: 100%;
+  margin-bottom: 25px;
+  transition: none; /* remove qualquer animação */
+}
+.search-bar .search-icon {
+  width: 20px;
+  height: 20px;
+  stroke: rgba(255, 255, 255, 0.5);
+  margin-right: 12px;
+}
+.search-bar input {
+  border: none;
+  background: none;
+  outline: none;
+  flex-grow: 1;
+  color: #E0E0E0;
+  font-size: 1rem;
+}
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-bar input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-bar:hover,
+.search-bar:focus-within {
+  background-color: #1E146F; /* mantém a mesma cor */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+/* LISTA DE CONVERSAS */
+.conversation-list {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+.item:hover, .item.active {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #2d2578;
+}
+.text-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.line {
+  width: 100%;
+  max-width: 160px;
+  height: 10px;
+  background-color: #5c5699;
+  border-radius: 10px;
+}
+.line.small {
+  max-width: 80px;
+  background-color: rgba(92, 86, 153, 0.6);
+}
+
+/* CABEÇALHO DO CHAT */
+.header-chat {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.user-info-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.icon-circle-header {
+  width: 45px;
+  height: 45px;
+  background-color: rgba(255,255,255,0.15);
+  border-radius: 50%;
+}
+.texto-voltar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.1;
+}
+.texto1 {
+  font-weight: 600;
+  color: #FFF;
+}
+.texto2 {
+  color: #9C8EE6;
+  font-size: 0.9rem;
+}
+
+/* BOTÃO FECHAR */
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #FFF;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Scrollbar estilizado (Webkit, Chrome, Edge, Safari) */
+.message-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.message-area::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.message-area::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #A100FF, #3C005E);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.message-area::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #C45FFF, #6D00A8);
+}
+
+
+
+
+/* ÁREA DE MENSAGENS */
+.message-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px 0;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  word-break: break-word;
+}
+.message.received {
+  align-self: flex-start;
+}
+.message.sent {
+  align-self: flex-end;
+}
+.message-content {
+  padding: 12px 16px;
+  border-radius: 16px;
+  background-color: rgba(255,255,255,0.15);
+  color: #FFF;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.message.sent .message-content {
+  background-color: #A100FF;
+}
+.message.received .message-content {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* INPUT DE MENSAGEM */
+.chat-input-area {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.chat-input-area input {
+  flex-grow: 1;
+  height: 45px;
+  background-color: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  padding: 10px 15px;
+  color: white;
+  font-size: 1rem;
+}
+.chat-input-area input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+.attach-btn, .send-btn {
+  width: 45px;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+.attach-btn {
+  background-color: rgba(255,255,255,0.2);
+  color: #FFF;
+}
+.attach-btn:hover, .send-btn:hover {
+  transform: scale(1.1);
+}
+.send-btn {
+  background-color: #A100FF;
+  color: #FFF;
+}
+
+.image-message img {
+  max-width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.pdf-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.pdf-link:hover {
+  text-decoration: underline;
+}
+

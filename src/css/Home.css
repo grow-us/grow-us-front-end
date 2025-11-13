@@ -1,0 +1,624 @@
+    /* --- Configuração Geral --- */
+    body {
+    background-color: #1a103c; /* Cor de fundo principal (roxo escuro) */
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    }
+
+    .home-container {
+    display: grid;
+    grid-template-columns: 260px 1fr 300px; /* Colunas: Esquerda, Centro (flexível), Direita */
+    gap: 24px;
+    padding: 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+    min-height: 100vh;
+    }
+
+    /* --- Estilos Reutilizáveis --- */
+    .card {
+    background-color: #2a1a5e; /* Cor de fundo dos cards (roxo mais claro) */
+    border-radius: 12px;
+    padding: 16px;
+    }
+
+    .widget.card{
+          margin-top: -15px;    /* ✅ move o card um pouco para cima */
+
+    }
+
+    /* ===== Eventos Próximos ===== */
+.widget.card.eventos-proximos {
+    margin-top: -15px;    /* ✅ move o card um pouco para cima */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 300px; /* limite de altura */
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 30px; /* ✅ espaço entre o card e o final da tela */
+}
+
+.widget.card.eventos-proximos .event-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.evento-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.evento-img {
+  width: 100%;
+  max-width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.evento-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.evento-info strong {
+  font-size: 1rem;
+  color: #fff;
+}
+
+.evento-info p {
+  font-size: 0.85rem;
+  color: #cfcfcf;
+  margin: 2px 0;
+}
+
+.event-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding-top: 10px;
+}
+
+.nav-arrow {
+  color: #a097c4;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #5a4f8b;
+}
+
+.nav-dot.active {
+  background-color: #7b61ff;
+}
+
+
+    .widget {
+    background-color: #2a1a5e;
+    border-radius: 12px;
+    padding: 16px;
+    }
+
+    .widget h3 {
+    margin: 0 0 16px 0;
+    color: white;
+    font-size: 16px;
+    }
+
+    .icon {
+    color: #a097c4; /* Cor dos ícones */
+    cursor: pointer;
+    font-size: 20px;
+    }
+
+    /* --- Placeholders (Linhas e Avatares) --- */
+    .avatar-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #5a4f8b;
+    flex-shrink: 0; /* Impede que encolha */
+    }
+
+    .text-placeholder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    }
+
+    .line-long {
+    height: 12px;
+    background-color: #5a4f8b;
+    border-radius: 4px;
+    width: 100%;
+    }
+
+    .line-short {
+    height: 12px;
+    background-color: #5a4f8b;
+    border-radius: 4px;
+    width: 60%;
+    }
+
+    /* --- Coluna Esquerda (Sidebar) --- */
+    .left-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    }
+
+    .logo-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    padding: 8px; /* Alinhamento visual */
+    }
+
+
+
+  .logo-header span {
+
+    margin-left: -10px;
+    margin-top: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #A100FF;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+    }
+
+      .logo-header svg {
+    filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.8));
+      width: 50px;
+      height: auto;
+      transition: transform 0.3s ease;
+
+    }
+
+    .suggested-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    }
+
+    .suggested-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    }
+
+    .emblems-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    }
+
+    .calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.month-label {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+.cal-header {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.cal-day {
+  padding: 8px;
+  border-radius: 50%;
+  cursor: default;
+}
+
+.cal-day.other-month {
+  opacity: 0.4;
+}
+
+.cal-day.today {
+  background-color: #9b59b6; /* 💜 roxo */
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+/* Impede scroll geral */
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+
+    .emblem-placeholder {
+    width: 100%;
+    padding-bottom: 100%; /* Truque para manter a proporção quadrada */
+    background-color: #5a4f8b;
+    border-radius: 8px;
+    }
+
+    /* --- Coluna Central (Feed) --- */
+    .main-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    }
+
+    .post-creator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    }
+
+    .post-creator .icon {
+    font-size: 24px;
+    }
+
+    .post-creator input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-size: 16px;
+    outline: none;
+    }
+    .post-creator input::placeholder {
+    color: #a097c4;
+    }
+
+    .feed-post {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    }
+
+    .post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    }
+
+    .post-header .icon-plus {
+    margin-left: auto;
+    color: #a097c4;
+    cursor: pointer;
+    }
+
+    .post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    }
+
+    .post-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #3a2a7a;
+    }
+
+    /* ===== NOVA BARRA SUPERIOR ===== */
+.top-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.chat-input-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-input-area input {
+  flex-grow: 1;
+  height: 45px;
+  background-color: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  padding: 10px 15px;
+  color: white;
+  font-size: 1rem;
+}
+
+.attach-btn, .send-btn {
+  width: 45px;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attach-btn {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.send-btn {
+  background-color: #A100FF;
+}
+
+.image-preview {
+  position: relative;
+  margin-top: 10px;
+}
+
+.image-preview img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.image-preview .remove-img {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+
+/* ===== FAZ COM QUE SÓ O FEED ROLE ===== */
+.main-feed.scrollable {
+  max-height: calc(100vh - 150px); /* Altura ajustável */
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #7b61ff #2a1a5e;
+}
+
+/* Aparência da barra de rolagem no Chrome */
+.main-feed.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+.main-feed.scrollable::-webkit-scrollbar-thumb {
+  background-color: #7b61ff;
+  border-radius: 4px;
+}
+.main-feed.scrollable::-webkit-scrollbar-track {
+  background: #2a1a5e;
+}
+
+
+    .post-actions .icon-right {
+    margin-left: auto; /* Joga o ícone de bookmark para a direita */
+    }
+
+    /* --- Coluna Direita (Widgets) --- */
+    .right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    }
+
+    .right-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    height: 56px; /* Altura para alinhamento */
+    }
+
+    .right-header .icon {
+    font-size: 24px;
+    color: #e0e0e0;
+    }
+
+    .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #2a1a5e;
+    border-radius: 20px; /* Borda bem arredondada */
+    padding: 10px 16px;
+    }
+
+    .search-bar .icon-search {
+    color: #a097c4;
+    margin-right: 8px;
+    }
+
+    .search-bar input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-size: 14px;
+    outline: none;
+    }
+    .search-bar input::placeholder {
+    color: #a097c4;
+    }
+
+    /* Calendário */
+    .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    text-align: center;
+    }
+
+    .cal-header {
+    font-size: 12px;
+    font-weight: bold;
+    color: #a097c4;
+    }
+
+    .cal-day {
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    }
+
+    .cal-day.other-month {
+    color: #5a4f8b; /* Dias de outros meses */
+    }
+
+    .cal-day.today {
+    background-color: #7b61ff; /* Destaque roxo (Qui, 6) */
+    color: white;
+    }
+
+    .cal-day.selected {
+    border: 2px solid #7b61ff; /* Destaque roxo (Qua, 30) */
+    box-sizing: border-box; /* Para o border não aumentar o tamanho */
+    }
+
+    /* Eventos Próximos */
+    .event-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 12px;
+    }
+
+    .event-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding-top: 8px;
+    }
+
+    .nav-arrow {
+    color: #a097c4;
+    font-size: 16px;
+    cursor: pointer;
+    }
+
+    .nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #5a4f8b;
+    cursor: pointer;
+    }
+
+    .nav-dot.active {
+    background-color: #7b61ff; /* Ponto ativo */
+    }
+
+    /* === Coluna central que contém a barra superior e os posts === */
+.center-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-height: 100vh;
+  overflow: hidden; /* impede rolagem fora da área de posts */
+}
+
+/* === Barra superior entre as sidebars === */
+.top-bar {
+  background-color: #2a1a5e;
+  border-radius: 12px;
+  padding: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* === Somente os posts rolam === */
+.main-feed.scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #7b61ff #2a1a5e;
+}
+
+.main-feed.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+.main-feed.scrollable::-webkit-scrollbar-thumb {
+  background-color: #7b61ff;
+  border-radius: 4px;
+}
+.main-feed.scrollable::-webkit-scrollbar-track {
+  background: #2a1a5e;
+}
+.post-creator {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post-creator textarea {
+  width: 100%;
+  min-height: 70px;
+  resize: none;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background: #f6f6f6;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image-preview img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 5px;
+}

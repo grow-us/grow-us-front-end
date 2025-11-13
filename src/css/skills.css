@@ -1,0 +1,259 @@
+
+
+
+/* ===== Container Principal ==== */
+.skills-body {
+  background: linear-gradient(135deg, #180D59, #3C005E);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.containerSkills {
+  width: 1100px;
+  height: 620px;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ===== Colunas ===== */
+.column {
+  width: 50%;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Linha divisória central */
+.column.left {
+  border-right: 1px solid #3f3e3e;
+
+
+}
+.linha {
+ width: 240%;
+  height: 1px;
+  background: linear-gradient(to right, #96968C);
+  margin: 60px 0;
+  margin-left: -5%;
+  opacity: 0.5;
+
+}
+
+
+/* ===== Cabeçalho Usuário ===== */
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #b0b0b0;
+}
+
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.user-meta {
+  font-size: 16px;
+  color: #bbb;
+}
+
+/* ===== Logo GrowUs ===== */
+.logo {
+position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 40px;
+  font-weight: 700;
+  color: #A100FF;
+  text-shadow: 5px 5px 15px black;
+}
+.column.right {
+    display: flex;
+    align-items: center;
+}
+.image_logo {
+    order: 1;
+    margin-right: -190px;
+    
+}
+.logo {
+    order: 2;
+}
+.image_logo svg {
+  margin-right: -10px;
+    display: block;
+    width: 50px;
+    height: auto;
+    filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
+    margin-top: -55%;
+    margin-left: -35%;
+}
+
+
+/* ===== Bloco de Skills ===== */
+.skills-section {
+  position: absolute;
+  top: 120px;
+  left: 40px;
+  right: 40px;
+}
+
+.title {
+  font-size: 35px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+/* ===== Input + Botão ===== */
+.input-row {
+  display: center;
+  margin-bottom: 25px;
+}
+
+.input-row input {
+  flex: 1;
+  height: 32px;
+  border: none;
+  outline: none;
+  border-radius: 6px 0 0 6px;
+  background: #d0d0d0;
+  color: #000;
+  padding: 0 10px;
+  font-size: 13px;
+  position: relative;
+  left: 220px;
+  bottom: 75px;
+}
+
+.input-row button {
+  width: 36px;
+  height: 32px;
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  left: 225px;
+  bottom: 75px;
+}
+
+
+/* ===== Tags ===== */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 60px;
+}
+
+.tags span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.85); /* Fundo sólido translúcido */
+  color: #000; /* Texto preto */
+  font-weight: 500;
+  font-size: 13px;
+  white-space: nowrap; /* Impede quebra de linha dentro da tag */
+  max-width: 100%; /* Impede overflow total */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Caso seja MUITO grande, adiciona "..." */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.tags span:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Remove larguras fixas antigas */
+.tags span:nth-child(3n+1),
+.tags span:nth-child(3n+2),
+.tags span:nth-child(3n+3) {
+  width: auto;
+}
+
+/* ===== Botões ===== */
+.btn {
+  position: absolute;
+  bottom: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* Botão Voltar */
+.btn.back {
+  left: 450px;
+  background: none;
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Botão Confirmar */
+.btn.confirm {
+  right: 400px;
+  width: 130px;
+  background: #A100FF;
+  color: #fff;
+  filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.5));
+}
+
+/* ===== Layout Fixo (sem responsividade) ===== */
+body, html {
+  min-width: 1100px;
+  overflow-x: hidden;
+}
+
+/* Botão para remover skill */
+.remove-btn {
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  color: #000;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #A100FF; /* Fica roxo ao passar o mouse */
+}

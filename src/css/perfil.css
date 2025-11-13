@@ -1,0 +1,269 @@
+.perfil-container {
+display: grid;
+grid-template-columns: 260px 1fr 300px;
+gap: 24px;
+padding: 24px;
+background-color: #1a103c;
+color: #e0e0e0;
+min-height: 100vh;
+
+}
+
+/* === COLUNA ESQUERDA === */
+.left-sidebar {
+ display: flex;
+ flex-direction: column;
+ gap: 24px;
+}
+
+.logo-header {
+ margin-bottom: 40px;
+ display: flex;
+ align-items: center;
+ gap: 12px;
+}
+
+.logo-header span {
+ color: #a100ff;
+ font-size: 28px;
+ font-weight: bold;
+}
+
+.card {
+ background-color: #2a1a5e;
+ border-radius: 12px;
+ padding: 16px;
+}
+
+.widget h3 {
+ color: white;
+ margin-bottom: 12px;
+}
+
+.conquistas-card {
+
+ margin-bottom: 10px;
+}
+
+
+.conquistas-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 8px;
+}
+
+.conquista-placeholder {
+ width: 100%;
+ padding-bottom: 100%;
+ border-radius: 8px;
+ background: #5a4f8b;
+}
+
+.pontos-bar {
+ background: rgba(255, 255, 255, 0.1);
+ border-radius: 8px;
+ padding: 6px 10px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+}
+
+.pontos-bar .progress {
+ width: 60%;
+ height: 6px;
+ background: #7b61ff;
+ border-radius: 4px;
+}
+
+/* --- PONTOS SEM BARRA --- */
+.pontos-card {
+ text-align: center;
+}
+
+.pontos-texto {
+ font-size: 18px;
+ font-weight: bold;
+ color: #ffffff;
+ background: linear-gradient(90deg, #a100ff);
+ padding: 10px 0;
+ border-radius: 10px;
+ margin-top: 8px;
+}
+
+
+.proximos-eventos .evento-card {
+ background: rgba(255, 255, 255, 0.1);
+ padding: 10px;
+ border-radius: 8px;
+ margin-bottom: 10px;
+ color: white;
+}
+
+/* === COLUNA CENTRAL === */
+.perfil-main {
+ display: flex;
+ flex-direction: column;
+ gap: 20px;
+  /* Adicionado: Garante que o container se comporte bem 
+     e não deixe o conteúdo interno (com scroll) vazar */
+ overflow: hidden;
+}
+
+/* ===== ESTILIZAÇÃO DO SCROLLBAR ===== */
+/* Funciona em Chrome, Edge, Safari (browsers Webkit) */
+
+/* Define a largura da barra */
+.perfil-conteudo::-webkit-scrollbar {
+width: 8px;
+}
+
+/* Fundo da barra (o "trilho") */
+.perfil-conteudo::-webkit-scrollbar-track {
+background: rgba(255, 255, 255, 0.05); /* Um fundo transparente da cor do card */ 
+border-radius: 10px;
+}
+
+/* O "pegador" (a parte que você arrasta) */
+.perfil-conteudo::-webkit-scrollbar-thumb {
+background: linear-gradient(180deg, #A100FF, #3C005E);
+border-radius: 10px;
+transition: background 0.3s ease;
+}
+
+/* O "pegador" ao passar o mouse */
+.perfil-conteudo::-webkit-scrollbar-thumb:hover {
+ background: linear-gradient(180deg, #C45FFF, #6D00A8);
+}
+
+/* --- TOPO DO PERFIL --- */
+.perfil-header {
+border-bottom: 1px solid #5a4f8b;  /* Cria a linha divisória */
+padding-bottom: 20px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+  /* Adicionado: Garante que o cabeçalho não encolha */
+  flex-shrink: 0;
+}
+
+.perfil-dados {
+ display: flex;
+ align-items: center;
+ gap: 15px;
+}
+
+.perfil-titulo h2 {
+ margin-right: 40px;
+ font-size: 1.6rem;
+ color: #f2f2f2;
+}
+
+
+.perfil-avatar {
+ width: 90px;
+ height: 90px;
+ border-radius: 50%;
+ background: #5a4f8b;
+}
+
+.perfil-info h2 {
+ margin: 0;
+ font-size: 22px;
+ color: white;
+}
+
+.perfil-info p {
+ color: #a097c4;
+ margin-top: 4px;
+}
+
+/* --- CONTEÚDO ABAIXO --- */
+.perfil-conteudo {
+ display: flex;
+ flex-direction: column;
+ gap: 18px;
+ padding: 16px 20px 24px 20px;
+  
+  /* Adicionado: Faz o conteúdo crescer para preencher o espaço */
+  flex: 1;
+  /* Adicionado: Habilita o scroll APENAS neste container */
+  overflow-y: auto;
+  /* Adicionado: Necessário para o flex: 1 funcionar corretamente com overflow */
+  min-height: 0;
+}
+
+.perfil-section {
+ background: rgba(255, 255, 255, 0.05);
+ border-radius: 12px;
+ padding: 16px;
+}
+
+.perfil-section h3 {
+ color: white;
+ margin-bottom: 10px;
+}
+
+.skills-list {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 10px;
+}
+
+.skill-badge {
+ background-color: #7b61ff;
+ color: white;
+ padding: 6px 12px;
+ border-radius: 20px;
+ font-size: 14px;
+}
+
+/* === COLUNA DIREITA === */
+.right-sidebar {
+ display: flex;
+ flex-direction: column;
+ gap: 24px;
+}
+
+.right-header {
+ margin-right: 70px;
+ margin-bottom: 40px;
+ display: flex;
+ justify-content: flex-end;
+ gap: 16px;
+}
+
+.icon {
+ color: #a097c4;
+ font-size: 22px;
+ cursor: pointer;
+}
+
+.eventos-lista .evento-item {
+ background: rgba(255, 255, 255, 0.1);
+ border-radius: 8px;
+ padding: 12px;
+ margin-bottom: 12px;
+}
+
+.btn-inscrever {
+ background: linear-gradient(90deg, #a100ff);
+ color: white;
+ border: none;
+ border-radius: 20px;
+ padding: 6px 12px;
+ cursor: pointer;
+ margin-top: 8px;
+}
+
+.saber-mais {
+ display: block;
+ font-size: 12px;
+ text-align: right;
+ color: #a097c4;
+ text-decoration: none;
+ margin-top: 4px;
+}
+
+.saber-mais:hover {
+ color: #ffffff;
+}

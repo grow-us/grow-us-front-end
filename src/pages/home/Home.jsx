@@ -226,7 +226,7 @@ export default function Home() {
         </header>
 
         {/* 🔹 Calendário */}
-        <div className="widget card">
+        <div className="widget card calendario">
           <h3>Calendário</h3>
           <div className="calendar-header">
             <FaChevronLeft

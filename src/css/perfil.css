@@ -1,269 +1,459 @@
 .perfil-container {
-display: grid;
-grid-template-columns: 260px 1fr 300px;
-gap: 24px;
-padding: 24px;
-background-color: #1a103c;
-color: #e0e0e0;
-min-height: 100vh;
-
+  display: grid;
+  grid-template-columns: 260px 1fr 300px;
+  gap: 24px;
+  padding: 24px;
+  background-color: #1a103c;
+  color: #e0e0e0;
+  min-height: 100vh;
 }
 
 /* === COLUNA ESQUERDA === */
 .left-sidebar {
- display: flex;
- flex-direction: column;
- gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .logo-header {
- margin-bottom: 40px;
- display: flex;
- align-items: center;
- gap: 12px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo-header span {
- color: #a100ff;
- font-size: 28px;
- font-weight: bold;
+  color: #a100ff;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .card {
- background-color: #2a1a5e;
- border-radius: 12px;
- padding: 16px;
+  background-color: #2a1a5e;
+  border-radius: 12px;
+  padding: 16px;
 }
 
 .widget h3 {
- color: white;
- margin-bottom: 12px;
+  color: white;
+  margin-bottom: 12px;
 }
 
 .conquistas-card {
-
- margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-
 .conquistas-grid {
- display: grid;
- grid-template-columns: repeat(3, 1fr);
- gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
 
 .conquista-placeholder {
- width: 100%;
- padding-bottom: 100%;
- border-radius: 8px;
- background: #5a4f8b;
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 8px;
+  background: #5a4f8b;
 }
 
-.pontos-bar {
- background: rgba(255, 255, 255, 0.1);
- border-radius: 8px;
- padding: 6px 10px;
- display: flex;
- align-items: center;
- justify-content: space-between;
-}
-
-.pontos-bar .progress {
- width: 60%;
- height: 6px;
- background: #7b61ff;
- border-radius: 4px;
-}
-
-/* --- PONTOS SEM BARRA --- */
 .pontos-card {
- text-align: center;
+  text-align: center;
 }
 
 .pontos-texto {
- font-size: 18px;
- font-weight: bold;
- color: #ffffff;
- background: linear-gradient(90deg, #a100ff);
- padding: 10px 0;
- border-radius: 10px;
- margin-top: 8px;
-}
-
-
-.proximos-eventos .evento-card {
- background: rgba(255, 255, 255, 0.1);
- padding: 10px;
- border-radius: 8px;
- margin-bottom: 10px;
- color: white;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(90deg, #a100ff, #6d00c8);
+  padding: 10px 0;
+  border-radius: 10px;
+  margin-top: 8px;
 }
 
 /* === COLUNA CENTRAL === */
 .perfil-main {
- display: flex;
- flex-direction: column;
- gap: 20px;
-  /* Adicionado: Garante que o container se comporte bem 
-     e não deixe o conteúdo interno (com scroll) vazar */
- overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
 }
 
-/* ===== ESTILIZAÇÃO DO SCROLLBAR ===== */
-/* Funciona em Chrome, Edge, Safari (browsers Webkit) */
-
-/* Define a largura da barra */
-.perfil-conteudo::-webkit-scrollbar {
-width: 8px;
-}
-
-/* Fundo da barra (o "trilho") */
+/* SCROLL */
+.perfil-conteudo::-webkit-scrollbar { width: 8px; }
 .perfil-conteudo::-webkit-scrollbar-track {
-background: rgba(255, 255, 255, 0.05); /* Um fundo transparente da cor do card */ 
-border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
 }
-
-/* O "pegador" (a parte que você arrasta) */
 .perfil-conteudo::-webkit-scrollbar-thumb {
-background: linear-gradient(180deg, #A100FF, #3C005E);
-border-radius: 10px;
-transition: background 0.3s ease;
+  background: linear-gradient(180deg, #A100FF, #3C005E);
+  border-radius: 10px;
 }
-
-/* O "pegador" ao passar o mouse */
 .perfil-conteudo::-webkit-scrollbar-thumb:hover {
- background: linear-gradient(180deg, #C45FFF, #6D00A8);
+  background: linear-gradient(180deg, #C45FFF, #6D00A8);
 }
 
-/* --- TOPO DO PERFIL --- */
 .perfil-header {
-border-bottom: 1px solid #5a4f8b;  /* Cria a linha divisória */
-padding-bottom: 20px;
- display: flex;
- align-items: center;
- justify-content: space-between;
-  /* Adicionado: Garante que o cabeçalho não encolha */
+  border-bottom: 1px solid #5a4f8b;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex-shrink: 0;
 }
 
 .perfil-dados {
- display: flex;
- align-items: center;
- gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .perfil-titulo h2 {
- margin-right: 40px;
- font-size: 1.6rem;
- color: #f2f2f2;
+  margin-right: 40px;
+  font-size: 1.6rem;
+  color: #f2f2f2;
 }
 
-
 .perfil-avatar {
- width: 90px;
- height: 90px;
- border-radius: 50%;
- background: #5a4f8b;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #5a4f8b;
 }
 
 .perfil-info h2 {
- margin: 0;
- font-size: 22px;
- color: white;
+  margin: 0;
+  font-size: 22px;
+  color: white;
 }
 
 .perfil-info p {
- color: #a097c4;
- margin-top: 4px;
+  color: #a097c4;
+  margin-top: 4px;
 }
 
-/* --- CONTEÚDO ABAIXO --- */
 .perfil-conteudo {
- display: flex;
- flex-direction: column;
- gap: 18px;
- padding: 16px 20px 24px 20px;
-  
-  /* Adicionado: Faz o conteúdo crescer para preencher o espaço */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px 20px 24px 20px;
   flex: 1;
-  /* Adicionado: Habilita o scroll APENAS neste container */
   overflow-y: auto;
-  /* Adicionado: Necessário para o flex: 1 funcionar corretamente com overflow */
   min-height: 0;
 }
 
 .perfil-section {
- background: rgba(255, 255, 255, 0.05);
- border-radius: 12px;
- padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
 }
 
+
+.perfil-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editar-btn,
+.salvar-btn {
+  background: #6c5ce7;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.9rem;
+}
+
+.salvar-btn {
+  background: #00b894;
+}
+
+.textarea-editar {
+  width: 100%;
+  padding: 10px;
+  min-height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  font-size: 0.95rem;
+}
+.perfil-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #2b2b2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #555;
+  border-radius: 50%;
+}
+/* Botão Editar Skills */
+.editar-skill-btn {
+  background: linear-gradient(90deg, #a100ff, #6d00c8);
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.editar-skill-btn:hover {
+  background: linear-gradient(90deg, #c45fff, #8c10ff);
+  transform: scale(1.05);
+}
+
+/* Área mais bonita */
+.perfil-section.skills-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #a100ff;
+  padding: 18px;
+  border-radius: 14px;
+}
+
+/* Títulos */
+.skills-titulo {
+  margin-top: 10px;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #d6c6ff;
+}
+
+/* Skills visualmente mais bonitas */
+.skill-badge {
+  background: rgba(161, 0, 255, 0.25);
+  border: 1px solid #a100ff;
+  padding: 6px 14px;
+  color: #ffffff;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  transition: 0.2s;
+}
+
+.skill-badge:hover {
+  background: #a100ff;
+  transform: translateY(-2px);
+}
+
+/* Placeholder mais elegante */
+.placeholder {
+  color: #c2b6e6;
+  opacity: 0.8;
+}
+
+
 .perfil-section h3 {
- color: white;
- margin-bottom: 10px;
+  color: white;
+  margin-bottom: 10px;
 }
 
 .skills-list {
- display: flex;
- flex-wrap: wrap;
- gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .skill-badge {
- background-color: #7b61ff;
- color: white;
- padding: 6px 12px;
- border-radius: 20px;
- font-size: 14px;
+  background-color: #7b61ff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
 /* === COLUNA DIREITA === */
 .right-sidebar {
- display: flex;
- flex-direction: column;
- gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .right-header {
- margin-right: 70px;
- margin-bottom: 40px;
- display: flex;
- justify-content: flex-end;
- gap: 16px;
+  margin-right: 70px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
 }
 
 .icon {
- color: #a097c4;
- font-size: 22px;
- cursor: pointer;
+  color: #a097c4;
+  font-size: 22px;
+  cursor: pointer;
 }
 
-.eventos-lista .evento-item {
- background: rgba(255, 255, 255, 0.1);
- border-radius: 8px;
- padding: 12px;
- margin-bottom: 12px;
+/* ==== EVENTOS ==== */
+.eventos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+/* Carrossel */
+.evento-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.carousel-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Card do evento */
+.evento-card {
+  width: 100%;
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.evento-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.evento-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.evento-titulo {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.evento-local {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.evento-data {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* Botão Inscrever-se — versão final */
 .btn-inscrever {
- background: linear-gradient(90deg, #a100ff);
- color: white;
- border: none;
- border-radius: 20px;
- padding: 6px 12px;
- cursor: pointer;
- margin-top: 8px;
+  background: linear-gradient(90deg, #a100ff, #6d00c8);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: 0.2s;
 }
 
+.btn-inscrever:hover {
+  background: linear-gradient(90deg, #c45fff, #8c10ff);
+}
+
+/* Saber mais */
 .saber-mais {
- display: block;
- font-size: 12px;
- text-align: right;
- color: #a097c4;
- text-decoration: none;
- margin-top: 4px;
+  display: block;
+  font-size: 12px;
+  text-align: right;
+  color: #a097c4;
+  text-decoration: none;
+  margin-top: 4px;
 }
 
 .saber-mais:hover {
- color: #ffffff;
+  color: #ffffff;
 }
+
+/* === EVENTOS DA HOME (VERSÃO PERFIL) === */
+
+.eventos-proximos-perfil h3 {
+  margin-bottom: 10px;
+}
+
+/* Lista vertical */
+.lista-eventos-home {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD igual ao da HOME */
+.evento-home-card {
+  display: flex;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border-radius: 12px;
+  align-items: center;
+}
+
+/* imagem do evento igual a HOME */
+.evento-home-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* texto igual a HOME */
+.evento-home-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.evento-home-info h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.evento-home-info .local {
+  font-size: 14px;
+  color: #d3d3d3;
+}
+
+.evento-home-info .data {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* botão já existente */
+

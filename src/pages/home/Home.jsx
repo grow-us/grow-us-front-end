@@ -154,7 +154,7 @@ export default function Home() {
         <div className="top-bar card">
           <div className="chat-input-area">
             <button className="attach-btn" onClick={handleAttachClick}>
-              <FaImage color="black" size={22} />
+              <FaImage color="white" size={22} />
             </button>
 
             <input
@@ -206,11 +206,13 @@ export default function Home() {
                   <span className="post-date">{post.date}</span>
                 </div>
 
-                <div className="post-actions">
-                  <FaRegHeart className="icon" />
-                  <FaShare className="icon" />
-                  <FaRegBookmark className="icon icon-right" />
-                </div>
+              <div className="post-actions">
+                <img src="../../../public/heart.svg" alt="Curtir" className="icon" />
+                <img src="../../../public/coment.svg" alt="Curtir" className="icon" />
+
+                <img src="../../../public/save.svg" alt="Compartilhar" className="icon icon icon-right" />
+              </div>
+
               </div>
             ))
           )}
@@ -220,9 +222,8 @@ export default function Home() {
       {/* ===== COLUNA DIREITA ===== */}
       <aside className="right-sidebar">
         <header className="right-header">
-          <FaRegCommentDots className="icon" />
-          <FaBell className="icon" />
-          <FaBars className="icon" />
+          <img src="../../../public/message-square.svg" alt="Compartilhar" className="icon" />
+          <img src="../../../public/account.svg" alt="Salvar" className="icon icon-right" />
         </header>
 
         {/* 🔹 Calendário */}
@@ -284,10 +285,15 @@ export default function Home() {
                   className="evento-img"
                 />
                 <div className="evento-info">
-                  <strong>{eventos[currentEvento].titulo}</strong>
-                  <p>{formatarData(eventos[currentEvento].dia)}</p>
-                  <p>{eventos[currentEvento].localidade}</p>
-                </div>
+  <strong>{eventos[currentEvento].titulo}</strong>
+  <p>{formatarData(eventos[currentEvento].dia)}</p>
+  <p>{eventos[currentEvento].localidade}</p>
+
+  <button className="btn-inscrever">
+    Inscreva-se
+  </button>
+</div>
+
               </div>
             )}
           </div>

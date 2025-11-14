@@ -118,6 +118,9 @@ export default function Skills() {
 
       if (response.ok) {
         alert("Skills atualizadas com sucesso!");
+        localStorage.setItem("hardSkills", JSON.stringify(hardSkills));
+        localStorage.setItem("softSkills", JSON.stringify(softSkills));
+
         navigate("/home");
       } else {
         const error = await response.json();

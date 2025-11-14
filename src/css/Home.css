@@ -30,30 +30,43 @@
     }
 
 .widget.card.calendario{
-  margin-top: -40px;
+    transform: scale(0.85);   /* diminui tudo proporcionalmente */
+
+  margin-top: -70px;
   margin-bottom: 30px;
+
+
+  
+
+
+
 }
 
     /* ===== Eventos Próximos ===== */
 .widget.card.eventos-proximos {
-    margin-top: -40px;    /* ✅ move o card um pouco para cima */
+    zoom: 0.85;   /* 🔥 FUNCIONA e mantém o box correto */
+
+  margin-top: -80px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  max-height: 300px; /* limite de altura */
-  overflow: hidden;
+  justify-content: flex-start;   /* antes era space-between → quebrava tudo */
+  max-height: 400px;             /* mais espaço para imagem + texto */
+  overflow: visible;              /* deixa o conteúdo aparecer */
   text-align: center;
-  margin-bottom: 30px; /* ✅ espaço entre o card e o final da tela */
+  margin-bottom: 30px;
+  padding-bottom: 35px; /* 🔥 cria espaço REAL dentro do card */
+
 }
 
+
 .widget.card.eventos-proximos .event-item {
-  flex: 1;
+  flex: none;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  text-align: center;
 }
+
 
 .evento-card {
   display: flex;
@@ -66,12 +79,12 @@
 
 .evento-img {
   width: 100%;
-  max-width: 200px;
-  height: 120px;
+  max-width: 160px;
+  height: 100px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
+
 
 .evento-info {
   display: flex;
@@ -98,6 +111,9 @@
   align-items: center;
   gap: 6px;
   padding-top: 10px;
+    margin-bottom: 20px;  /* 🔥 AQUI resolve */
+
+  
 }
 
 .nav-arrow {
@@ -131,7 +147,6 @@
     }
 
     .icon {
-    color: #a097c4; /* Cor dos ícones */
     cursor: pointer;
     font-size: 20px;
     }
@@ -309,7 +324,10 @@
     color: #a097c4;
     }
 
+
+
     .feed-post {
+
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -445,6 +463,16 @@
     flex-direction: column;
     gap: 24px;
     }
+
+    .post-actions .icon {
+  background-color: transparent; /* remove qualquer fundo */
+  box-shadow: none;              /* remove sombra, se houver */
+}
+
+    .right-header .icon {
+  background-color: transparent; /* remove qualquer fundo */
+  box-shadow: none;              /* remove sombra, se houver */
+}
 
     .right-header {
     display: flex;

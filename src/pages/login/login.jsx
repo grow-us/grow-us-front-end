@@ -34,6 +34,9 @@ export default function Login() {
         localStorage.setItem("nome", data.nome);
         localStorage.setItem("perfil", data.perfil);
         localStorage.setItem("cargo", data.cargo);
+        localStorage.setItem("objetivo",data.objetivo);
+        localStorage.setItem("carreira",data.carreira);
+        localStorage.setItem("sobre",data.sobre);
 
         // redireciona para Skills
         navigate("/Home");

@@ -147,6 +147,7 @@
     }
 
     .icon {
+      background: transparent;
     cursor: pointer;
     font-size: 20px;
     }
@@ -309,6 +310,7 @@
     }
 
     .post-creator .icon {
+      background: transparent;
     font-size: 24px;
     }
 
@@ -339,7 +341,28 @@
     gap: 12px;
     }
 
+    .post-author{
+      font-size: large;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .post-header img{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .post-img{
+      max-width: 600px;
+      max-height: 600px;
+    }
+
     .post-header .icon-plus {
+      background: transparent;
     margin-left: auto;
     color: #a097c4;
     cursor: pointer;
@@ -422,7 +445,6 @@
   top: 5px;
   right: 10px;
   background: rgba(0,0,0,0.6);
-  color: white;
   border: none;
   border-radius: 50%;
   width: 25px;
@@ -453,6 +475,8 @@
 }
 
 
+
+
     .post-actions .icon-right {
     margin-left: auto; /* Joga o ícone de bookmark para a direita */
     }
@@ -465,8 +489,9 @@
     }
 
     .post-actions .icon {
-  background-color: transparent; /* remove qualquer fundo */
-  box-shadow: none;              /* remove sombra, se houver */
+background: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;/* remove sombra, se houver */
 }
 
     .right-header .icon {

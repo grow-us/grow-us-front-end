@@ -32,6 +32,10 @@ export default function Cadastro() {
         localStorage.setItem("nome",data.nome);
         localStorage.setItem("perfil",data.perfil);
         localStorage.setItem("cargo",data.cargo);
+        localStorage.setItem("objetivo",data.objetivo);
+        localStorage.setItem("carreira",data.carreira);
+        localStorage.setItem("sobre",data.sobre);
+
         
         navigate("/Skills");
       } else {

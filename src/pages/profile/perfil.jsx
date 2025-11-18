@@ -19,15 +19,15 @@ export default function Perfil() {
 
     // Textos dinâmicos (com valores default)
     const [sobreMim, setSobreMim] = useState(
-        "Sou uma pessoa apaixonada por tecnologia, inovação e aprendizado contínuo. Busco sempre contribuir em projetos que impactem positivamente a sociedade."
+        ""
     );
 
     const [objetivo, setObjetivo] = useState(
-        "Evoluir profissionalmente na área de desenvolvimento web, com foco em soluções escaláveis e eficientes."
+        ""
     );
 
     const [carreira, setCarreira] = useState(
-        "Desenvolvedor Front-End com 3 anos de experiência em React e JavaScript, atuando em projetos colaborativos e ágeis."
+        ""
     );
 
     // Controle edição
@@ -313,11 +313,34 @@ export default function Perfil() {
 
             {/* ===== COLUNA DIREITA ===== */}
             <aside className="right-sidebar">
-                <header className="right-header">
-                    <FaRegCommentDots className="icon" />
-                    <FaBell className="icon" />
-                    <FaBars className="icon" />
-                </header>
+<header className="right-header">
+
+    {/* ==== ÍCONE DE MENSAGENS COM TOOLTIP ==== */}
+    <div className="icon-wrapper">
+        <img 
+            src="../../../public/message-square.svg" 
+            alt="Mensagens" 
+            className="icon"
+            onClick={() => window.location.href = "/chat"}
+            style={{ cursor: "pointer" }}
+        />
+        <span className="tooltip">Mensagens</span>
+    </div>
+
+    {/* ==== ÍCONE DE HOME COM TOOLTIP ==== */}
+    <div className="icon-wrapper">
+        <img 
+            src="../../../public/menu.svg" 
+            alt="Início" 
+            className="icon"
+            onClick={() => window.location.href = "/home"}
+            style={{ cursor: "pointer" }}
+        />
+        <span className="tooltip">Início</span>
+    </div>
+
+</header>
+
 
                 <div className="widget card eventos-proximos-perfil">
                     <h3>Eventos</h3>

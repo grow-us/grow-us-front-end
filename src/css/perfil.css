@@ -456,6 +456,84 @@
   font-size: 13px;
   opacity: 0.8;
 }
+/* NOVO HEADER MODERNO */
+.novo-header {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 10px 0;
+}
 
-/* botão já existente */
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.menu-item:hover {
+    background: #f1f1f1;
+}
+
+.menu-item .icon {
+    font-size: 20px;
+    color: #3D3DFF; /* azul moderno */
+}
+
+.menu-item span {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c2c2c;
+    font-family: "Outfit", sans-serif;
+}
+/* Container dos ícones */
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 18px;
+}
+
+/* Tooltip moderno */
+.tooltip {
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  transform: translate(-100%, -50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+  font-family: "Outfit", sans-serif;
+  backdrop-filter: blur(6px);
+  transform-origin: right center;
+}
+
+/* Mostra o tooltip ao passar o mouse */
+.icon-wrapper:hover .tooltip {
+  opacity: 1;
+  left: -14px;
+}
+
+/* Ícones */
+.icon {
+  width: 40px;
+  height: 40px;
+  transition: 0.2s ease;
+}
+
+.icon-wrapper:hover .icon {
+  transform: scale(1.15);
+}
+
 

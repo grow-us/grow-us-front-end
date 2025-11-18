@@ -151,6 +151,7 @@
     cursor: pointer;
     font-size: 20px;
     }
+    
 
     /* --- Placeholders (Linhas e Avatares) --- */
     .avatar-placeholder {
@@ -219,20 +220,59 @@
 
     }
 
-    .suggested-list {
+.suggested-list {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    }
+    gap: 14px;
+}
 
-    .suggested-list li {
+.suggest-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    }
+    gap: 10px;
+}
+
+.suggest-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.suggest-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.suggest-info strong {
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.suggest-info .cargo {
+    font-size: 0.75rem;
+    color: #cfcfcf;
+}
+
+.btn-seguir {
+    margin-left: auto;
+  background-color: #A100FF;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: 0.2s;
+}
+
+.btn-seguir:hover {
+    background-color: #45a049;
+}
+
 
     .emblems-grid {
     display: grid;
@@ -373,6 +413,18 @@
     flex-direction: column;
     gap: 8px;
     }
+
+  .action-btn {
+  color: white;
+  background: none; /* Remove o fundo */
+  border: none;     /* Remove a borda */
+  
+  /* Opcional: remove preenchimento interno se o botão tiver */
+  padding: 0; 
+  
+  /* Garante que o mouse mude para a "mãozinha" */
+  cursor: pointer; 
+}
 
     .post-actions {
     display: flex;
@@ -678,4 +730,48 @@ background: none !important;
   max-width: 100%;
   border-radius: 10px;
   margin-top: 5px;
+}
+
+/* Container dos ícones */
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 18px;
+}
+
+/* Tooltip moderno */
+.tooltip {
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  transform: translate(-100%, -50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+  font-family: "Outfit", sans-serif;
+  backdrop-filter: blur(6px);
+  transform-origin: right center;
+}
+
+/* Aparece ao passar o mouse */
+.icon-wrapper:hover .tooltip {
+  opacity: 1;
+  left: -14px;
+}
+
+/* Suavidade no ícone */
+.icon {
+  width: 27px;
+  height: 27px;
+  transition: 0.2s ease;
+}
+
+.icon-wrapper:hover .icon {
+  transform: scale(1.15);
 }

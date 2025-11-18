@@ -6,9 +6,7 @@ import {
     FaImage, FaRegHeart, FaRegCommentDots, FaChevronLeft, FaChevronRight 
 } from 'react-icons/fa';
 
-// ============================
-// 🔥 FIREBASE CONFIG AQUI MESMO
-// ============================
+
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -33,16 +31,14 @@ export default function Home() {
     const [posts, setPosts] = useState([]); 
     const [inputValue, setInputValue] = useState("");
     const [imagePreview, setImagePreview] = useState(null);
-    const [selectedFile, setSelectedFile] = useState(null); // 🔥 novo
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [sugeridos, setSugeridos] = useState([]);
     const [eventos, setEventos] = useState([]);
     const [currentEvento, setCurrentEvento] = useState(0);
     const fileInputRef = useRef(null);
     const [currentDate, setCurrentDate] = useState(new Date());
     const today = new Date();
 
-    // ============================
-    // 🔥 GET POSTS
-    // ============================
     const fetchPosts = async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/posts`);
@@ -54,9 +50,31 @@ export default function Home() {
         }
     };
 
-    // ============================
-    // 🔥 ENVIAR POST (COM UPLOAD)
-    // ============================
+    const fetchSugeridos = async () => {
+    try {
+        const emailAtual = localStorage.getItem("email");
+        if (!emailAtual) return;
+
+        const res = await fetch(`${API_BASE_URL}/usuarios?email=${emailAtual}`);
+        if (!res.ok) throw new Error("Erro ao buscar sugeridos");
+
+        const data = await res.json();
+
+        // filtrar só quem não está sendo seguido
+        let naoSeguidos = data.filter(u => u.estouSeguindo === false);
+
+        // embaralhar
+        naoSeguidos = naoSeguidos.sort(() => Math.random() - 0.5);
+
+        // pegar só 3
+        const selecionados = naoSeguidos.slice(0, 3);
+
+        setSugeridos(selecionados);
+    } catch (err) {
+        console.error("Erro ao carregar sugeridos:", err);
+    }
+    };
+
     const handleSend = async () => {
         if (!inputValue.trim() && !selectedFile) return;
 
@@ -105,11 +123,9 @@ export default function Home() {
         }
     };
 
-    // ============================
-    // 🔥 Curtir Post
-    // ============================
-const handleLike = async (postId) => {
-  const email = localStorage.getItem("email");
+
+    const handleLike = async (postId) => {
+    const email = localStorage.getItem("email");
 
   try {
     const res = await fetch(`${API_BASE_URL}/posts/${postId}`, {
@@ -137,17 +153,9 @@ const handleLike = async (postId) => {
     console.error("Erro:", error);
     alert(error.message);
   }
-};
+    };
 
-
-
-    // ============================
-    // 🔥 Buscar Posts + Eventos
-    // ============================
-    useEffect(() => {
-        fetchPosts();
-
-        const fetchEventos = async () => {
+    const fetchEventos = async () => {
             try {
                 const response = await fetch("https://app-zxlyzt4g3q-uc.a.run.app/eventos");
                 if (!response.ok) throw new Error("Erro ao buscar eventos");
@@ -156,11 +164,14 @@ const handleLike = async (postId) => {
             } catch (error) {
                 console.error("Erro ao carregar eventos:", error);
             }
-        };
+    };
+
+    useEffect(() => {
+        fetchPosts();
+        fetchSugeridos();
         fetchEventos();
     }, []);
 
-    // ===== IMAGEM: Pré-visualização + capturar arquivo =====
     const handleAttachClick = () => fileInputRef.current.click();
 
     const handleFileChange = (e) => {
@@ -172,7 +183,6 @@ const handleLike = async (postId) => {
     };
 
     // ===== RESTANTE DO SEU CÓDIGO (layout, calendário etc.) =====
-    // ===== (Não modifiquei nada abaixo para não quebrar seu layout) =====
 
     const formatarData = (isoString) => {
         if (!isoString) return "Data não informada";
@@ -244,17 +254,31 @@ const handleLike = async (postId) => {
 
                 <div className="widget">
                     <h3>Sugeridos</h3>
-                    <ul className="suggested-list">
-                        {[...Array(4)].map((_, i) => (
-                            <li key={i}>
-                                <div className="avatar-placeholder"></div>
-                                <div className="text-placeholder">
-                                    <div className="line-short"></div>
-                                    <div className="line-long"></div>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
+<ul className="suggested-list">
+    {sugeridos.length === 0 ? (
+        <p style={{ fontSize: "0.8rem", opacity: 0.6 }}>Nenhum sugerido</p>
+    ) : (
+        sugeridos.map((user, i) => (
+            <li key={i} className="suggest-item">
+                <img 
+                    src={user.perfil}
+                    alt={user.nome}
+                    className="suggest-avatar"
+                />
+
+                <div className="suggest-info">
+                    <strong>{user.nome}</strong>
+                    <span className="cargo">{user.cargo}</span>
+                </div>
+
+                <button className="btn-seguir">
+                    Seguir
+                </button>
+            </li>
+        ))
+    )}
+</ul>
+
                 </div>
 
                 <div className="widget">
@@ -372,10 +396,35 @@ const handleLike = async (postId) => {
 
             {/* ===== COLUNA DIREITA ===== */}
             <aside className="right-sidebar">
-                <header className="right-header">
-                    <img src="../../../public/message-square.svg" alt="Mensagens" className="icon" />
-                    <img src="../../../public/account.svg" alt="Conta" className="icon icon-right" />
-                </header>
+<header className="right-header">
+
+    {/* ==== ÍCONE DE MENSAGENS COM TOOLTIP ==== */}
+    <div className="icon-wrapper">
+        <img
+            src="../../../public/message-square.svg"
+            alt="Mensagens"
+            className="icon"
+            onClick={() => window.location.href = "/chat"}
+            style={{ cursor: "pointer" }}
+        />
+        <span className="tooltip">Mensagens</span>
+    </div>
+
+    {/* ==== ÍCONE DE PERFIL COM TOOLTIP ==== */}
+    <div className="icon-wrapper">
+        <img
+            src="../../../public/account.svg"
+            alt="Perfil"
+            className="icon icon-right"
+            onClick={() => window.location.href = "/perfil"}
+            style={{ cursor: "pointer" }}
+        />
+        <span className="tooltip">Perfil</span>
+    </div>
+
+</header>
+
+
 
                 <div className="widget card calendario">
                     <h3>Calendário</h3>

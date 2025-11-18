@@ -4,17 +4,41 @@ import Logo from '../../componetes/Logo'
 import Anexo from '../../componetes/Anexo'
 import Send from '../../componetes/Send'
 
-
-
 export default function Chat() {
+
+  const [usuarios, setUsuarios] = useState([]);     // lista de usuários da API
+  const [usuarioSelecionado, setUsuarioSelecionado] = useState(null); // usuario clicado
+
   const [messages, setMessages] = useState([
     { type: 'received', text: 'Olá! Tudo bem?' },
     { type: 'sent', text: 'Oi! Tudo ótimo e você?' },
   ]);
 
+  const [selectedUser, setSelectedUser] = useState({
+  nome: "Conversa",
+  cargo: "Ativa",
+  perfil: null
+});
+
+
   const [inputValue, setInputValue] = useState('');
   const fileInputRef = useRef(null);
   const messageEndRef = useRef(null);
+
+  // 🟣 BUSCAR USUÁRIOS DA API AO ABRIR
+  useEffect(() => {
+    async function carregarUsuarios() {
+      try {
+        const email = localStorage.getItem("email");
+        const res = await fetch(`https://app-zxlyzt4g3q-uc.a.run.app/usuarios?email=${email}`);
+        const data = await res.json();
+        setUsuarios(data); // ← salva a lista
+      } catch (err) {
+        console.error("Erro ao buscar usuários:", err);
+      }
+    }
+    carregarUsuarios();
+  }, []);
 
   // 📤 Enviar texto
   const handleSend = () => {
@@ -24,7 +48,6 @@ export default function Chat() {
     setMessages((prev) => [...prev, newMessage]);
     setInputValue('');
 
-    // Resposta automática após 1s
     setTimeout(() => {
       const autoReply = {
         type: 'received',
@@ -34,7 +57,6 @@ export default function Chat() {
     }, 1000);
   };
 
-  // 🤖 Resposta automática
   const gerarRespostaAutomatica = (msg) => {
     const lower = msg.toLowerCase();
 
@@ -45,12 +67,10 @@ export default function Chat() {
     return 'Entendi! Pode me contar mais sobre isso? 🤔';
   };
 
-  // 📎 Clique no botão de anexo
   const handleAttachClick = () => {
     fileInputRef.current.click();
   };
 
-  // 📂 Quando um arquivo é selecionado
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -61,33 +81,16 @@ export default function Chat() {
     reader.onload = (event) => {
       let newMessage;
 
-      // Se for imagem (jpg/png/gif/webp)
       if (fileType.startsWith('image/')) {
-        newMessage = {
-          type: 'sent',
-          image: event.target.result,
-          fileName: file.name,
-        };
-      }
-      // Se for PDF
-      else if (fileType === 'application/pdf') {
-        newMessage = {
-          type: 'sent',
-          pdf: event.target.result,
-          fileName: file.name,
-        };
-      }
-      // Caso contrário, só mostra o nome do arquivo
-      else {
-        newMessage = {
-          type: 'sent',
-          text: `📎 Enviado: ${file.name}`,
-        };
+        newMessage = { type: 'sent', image: event.target.result, fileName: file.name };
+      } else if (fileType === 'application/pdf') {
+        newMessage = { type: 'sent', pdf: event.target.result, fileName: file.name };
+      } else {
+        newMessage = { type: 'sent', text: `📎 Enviado: ${file.name}` };
       }
 
       setMessages((prev) => [...prev, newMessage]);
 
-      // Simula resposta automática
       setTimeout(() => {
         setMessages((prev) => [
           ...prev,
@@ -96,25 +99,28 @@ export default function Chat() {
       }, 1000);
     };
 
-    reader.readAsDataURL(file); // lê o arquivo em base64
+    reader.readAsDataURL(file);
   };
 
-  // Rolagem automática
+  // auto scroll
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   return (
-<div className="container">
-  <div className="coluna-esq">
+    <div className="container">
 
-    {/* 👇 CORREÇÃO AQUI 👇 */}
-    <div className="logo-grupo">
-      <div className="img-logo">
-        <Logo color="black" size={22} />
-      </div>
-        <span className="logo-chat" translate="no">GrowUS</span>
-    </div>
+      {/* ==========================
+          COLUNA ESQUERDA
+      ============================ */}
+      <div className="coluna-esq">
+
+        <div className="logo-grupo">
+          <div className="img-logo">
+            <Logo color="black" size={22} />
+          </div>
+          <span className="logo-chat" translate="no">GrowUS</span>
+        </div>
 
         <div className="search-bar">
           <svg
@@ -135,98 +141,129 @@ export default function Chat() {
           <input type="text" placeholder="Procurar conversas" />
         </div>
 
+        {/* LISTA REAL DE USUÁRIOS */}
         <div className="conversation-list">
-          {[...Array(6)].map((_, index) => (
-            <div key={index} className={`item ${index === 0 ? 'active' : ''}`}>
+          {usuarios.map((user, index) => (
+            <div
+              key={index}
+              className={`item ${usuarioSelecionado?.email === user.email ? "active" : ""}`}
+              onClick={() => setUsuarioSelecionado(user)}
+            >
               <div className="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                  <path stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <img
+                  src={user.perfil}
+                  alt={user.nome}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "50%",
+                    objectFit: "cover"
+                  }}
+                />
               </div>
+
               <div className="text-lines">
-                <div className="line"></div>
-                <div className="line small"></div>
+                <div style={{ color: "white", fontSize: "0.95rem", fontWeight: "600" }}>
+                  {user.nome}
+                </div>
+                <div style={{ color: "#bfbfff", fontSize: "0.8rem" }}>
+                  {user.cargo}
+                </div>
               </div>
             </div>
           ))}
         </div>
+
       </div>
 
-      <div className="coluna-dir">
-        <div className="header-chat">
-          <div className="user-info-header">
-            <div className="icon-circle-header">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                <path stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <div className="texto-voltar">
-              <div className="texto1">Conversa</div>
-              <div className="texto2">Ativa</div>
-            </div>
+
+      {/* ==========================
+          COLUNA DIREITA
+      ============================ */}
+{/* ==========================
+    COLUNA DIREITA
+============================ */}
+<div className="coluna-dir">
+
+  {!usuarioSelecionado ? (
+    // ==========================
+    //   TELA INICIAL DO CHAT
+    // ==========================
+    <div className="tela-inicial-chat">
+      <img 
+        src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png"
+        alt="Start Chat"
+        className="img-start"
+      />
+      <h2>Inicie uma conversa</h2>
+    </div>
+  ) : (
+    <>
+      {/* Cabeçalho */}
+      <div className="header-chat">
+        <div className="user-info-header">
+          <img
+            src={usuarioSelecionado?.perfil || "https://i.imgur.com/6VBx3io.png"}
+            alt="Foto"
+            className="foto-header"
+          />
+          <div className="texto-voltar">
+            <div className="texto1">{usuarioSelecionado.nome}</div>
+            <div className="texto2">{usuarioSelecionado.cargo}</div>
           </div>
         </div>
-
-        <div className="message-area">
-          {messages.map((msg, index) => (
-            <div key={index} className={`message ${msg.type}`}>
-              {/* 📄 Se for PDF */}
-              {msg.pdf ? (
-                <a
-                  href={msg.pdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pdf-link"
-                >
-                  📄 {msg.fileName}
-                </a>
-              ) : msg.image ? (
-                /* 🖼️ Se for imagem */
-                <div className="image-message">
-                  <img src={msg.image} alt={msg.fileName} />
-                </div>
-              ) : (
-                /* 💬 Mensagem normal */
-                <div className="message-content">{msg.text}</div>
-              )}
-            </div>
-          ))}
-          <div ref={messageEndRef} />
-        </div>
-
-        <div className="chat-input-area">
-          {/* 📎 Botão de Anexo */}
-          <button className="attach-btn" onClick={handleAttachClick}>
-
-              <Anexo color="black" size={22} />
-
-
-          </button>
-
-          {/* Input oculto */}
-          <input
-            type="file"
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-            accept="image/*,application/pdf"
-            onChange={handleFileChange}
-          />
-
-          {/* Campo de texto */}
-          <input
-            type="text"
-            placeholder="Escreva uma mensagem..."
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-          />
-
-          {/* ✈️ Botão de envio */}
-          <button className="send-btn" onClick={handleSend}>
-              <Send color="black" size={22} />
-          </button>
-        </div>
       </div>
+
+      {/* MENSAGENS */}
+      <div className="message-area">
+        {messages.map((msg, index) => (
+          <div key={index} className={`message ${msg.type}`}>
+            {msg.pdf ? (
+              <a href={msg.pdf} target="_blank" rel="noopener noreferrer" className="pdf-link">
+                📄 {msg.fileName}
+              </a>
+            ) : msg.image ? (
+              <div className="image-message">
+                <img src={msg.image} alt={msg.fileName} />
+              </div>
+            ) : (
+              <div className="message-content">{msg.text}</div>
+            )}
+          </div>
+        ))}
+        <div ref={messageEndRef} />
+      </div>
+
+      {/* INPUT */}
+      <div className="chat-input-area">
+        <button className="attach-btn" onClick={handleAttachClick}>
+          <Anexo color="black" size={22} />
+        </button>
+
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          accept="image/*,application/pdf"
+          onChange={handleFileChange}
+        />
+
+        <input
+          type="text"
+          placeholder="Escreva uma mensagem..."
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+        />
+
+        <button className="send-btn" onClick={handleSend}>
+          <Send color="black" size={22} />
+        </button>
+      </div>
+    </>
+  )}
+</div>
+
     </div>
   );
 }

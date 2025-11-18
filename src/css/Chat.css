@@ -190,6 +190,7 @@
   color: #FFF;
 }
 .texto2 {
+  margin-top: 10px;
   color: #9C8EE6;
   font-size: 0.9rem;
 }
@@ -326,3 +327,36 @@
   text-decoration: underline;
 }
 
+.foto-header {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 2px solid #ffffff22;
+}
+
+
+.tela-inicial-chat {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+  text-align: center;
+}
+
+.tela-inicial-chat .img-start {
+  width: 180px;
+  height: 180px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.tela-inicial-chat h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: white;
+}

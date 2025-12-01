@@ -12,7 +12,7 @@ export default function Cadastro() {
 
   // Função que faz a requisição para API
   const handleSubmit = async (e) => {
-    e.preventDefault(); // evita o reload da página
+    e.preventDefault(); 
 
     try {
       const response = await fetch("https://us-central1-grow-us-1.cloudfunctions.net/app/cadastrar", {

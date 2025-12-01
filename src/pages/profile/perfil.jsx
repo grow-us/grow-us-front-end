@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../css/Perfil.css";
+import "../../css/perfil.css";
 import Logo from "../../componetes/Logo";
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

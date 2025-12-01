@@ -34,9 +34,13 @@ export default function Login() {
         localStorage.setItem("nome", data.nome);
         localStorage.setItem("perfil", data.perfil);
         localStorage.setItem("cargo", data.cargo);
-        localStorage.setItem("objetivo",data.objetivo);
+        localStorage.setItem("objetivos",data.objetivos);
         localStorage.setItem("carreira",data.carreira);
         localStorage.setItem("sobre",data.sobre);
+
+      localStorage.setItem("hardSkills", JSON.stringify(data.hardSkills || []));
+      localStorage.setItem("softSkills", JSON.stringify(data.softSkills || []));
+
 
         // redireciona para Skills
         navigate("/Home");

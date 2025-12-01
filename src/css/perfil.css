@@ -49,6 +49,72 @@
   gap: 8px;
 }
 
+/* Placeholder para conquistas */
+.emblemas-grid-pequeno {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 8px;
+}
+
+.emblema-item-pequeno {
+  position: relative;
+  display: inline-block;
+  /* Garante que o tooltip não seja cortado */
+  overflow: visible;
+}
+
+.emblema-icon-pequeno {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 20%;
+  border: 2px solid #ddd;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Efeito ao passar o mouse: leve zoom + destaque */
+.emblema-item-pequeno:hover .emblema-icon-pequeno {
+  transform: scale(1.1);
+  border-color: #999;
+}
+
+/* Tooltip personalizado */
+.emblema-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  margin-bottom: 6px;
+  z-index: 10;
+  pointer-events: none; /* evita interferir com o hover */
+}
+
+.emblema-item-pequeno:hover .emblema-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* Placeholder para conquistas */
+
+
+
+/* Placeholder para conquistas */
+
+
+
+
 .conquista-placeholder {
   width: 100%;
   padding-bottom: 100%;

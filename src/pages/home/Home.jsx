@@ -6,7 +6,6 @@ import {
     FaImage, FaRegHeart, FaRegCommentDots, FaChevronLeft, FaChevronRight 
 } from 'react-icons/fa';
 
-
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -20,10 +19,8 @@ const firebaseConfig = {
   appId: "1:8287550565:web:78e80f04ae7da93c72da8c"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-// ============================
 
 export default function Home() {
     const API_BASE_URL = "https://app-zxlyzt4g3q-uc.a.run.app";
@@ -35,10 +32,13 @@ export default function Home() {
     const [sugeridos, setSugeridos] = useState([]);
     const [eventos, setEventos] = useState([]);
     const [currentEvento, setCurrentEvento] = useState(0);
+    const [inscricoesUsuario, setInscricoesUsuario] = useState(new Set());
+    const [emblems, setEmblems] = useState([]); // 👈 NOVO: estado para emblemas
     const fileInputRef = useRef(null);
     const [currentDate, setCurrentDate] = useState(new Date());
     const today = new Date();
 
+    // ============= FUNÇÕES EXISTENTES =============
     const fetchPosts = async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/posts`);
@@ -51,44 +51,48 @@ export default function Home() {
     };
 
     const fetchSugeridos = async () => {
-    try {
-        const emailAtual = localStorage.getItem("email");
-        if (!emailAtual) return;
+        try {
+            const emailAtual = localStorage.getItem("email");
+            if (!emailAtual) return;
 
-        const res = await fetch(`${API_BASE_URL}/usuarios?email=${emailAtual}`);
-        if (!res.ok) throw new Error("Erro ao buscar sugeridos");
+            const res = await fetch(`${API_BASE_URL}/usuarios?email=${emailAtual}`);
+            if (!res.ok) throw new Error("Erro ao buscar sugeridos");
 
-        const data = await res.json();
+            const data = await res.json();
+            let naoSeguidos = data.filter(u => u.estouSeguindo === false);
+            naoSeguidos = naoSeguidos.sort(() => Math.random() - 0.5);
+            const selecionados = naoSeguidos.slice(0, 3);
+            setSugeridos(selecionados);
+        } catch (err) {
+            console.error("Erro ao carregar sugeridos:", err);
+        }
+    };
 
-        // filtrar só quem não está sendo seguido
-        let naoSeguidos = data.filter(u => u.estouSeguindo === false);
+    // ============= NOVA FUNÇÃO: buscar emblemas =============
+    const fetchEmblems = async () => {
+        const email = localStorage.getItem("email");
+        if (!email) return;
 
-        // embaralhar
-        naoSeguidos = naoSeguidos.sort(() => Math.random() - 0.5);
-
-        // pegar só 3
-        const selecionados = naoSeguidos.slice(0, 3);
-
-        setSugeridos(selecionados);
-    } catch (err) {
-        console.error("Erro ao carregar sugeridos:", err);
-    }
+        try {
+            const response = await fetch(`${API_BASE_URL}/emblemas/${email}`);
+            if (!response.ok) throw new Error("Erro ao buscar emblemas");
+            const data = await response.json();
+            setEmblems(data); // espera-se: [{ nome: "...", iconeUrl: "..." }, ...]
+        } catch (error) {
+            console.error("Erro ao carregar emblemas:", error);
+        }
     };
 
     const handleSend = async () => {
         if (!inputValue.trim() && !selectedFile) return;
 
         let uploadedImageURL = null;
-
-        // ---- 🔥 Upload da imagem ----
         if (selectedFile) {
             try {
                 const fileName = `${Date.now()}-${selectedFile.name}`;
                 const storageRef = ref(storage, `posts/${fileName}`);
-
                 await uploadBytes(storageRef, selectedFile);
                 uploadedImageURL = await getDownloadURL(storageRef);
-
             } catch (error) {
                 console.error("Erro ao fazer upload:", error);
                 alert("Erro ao enviar imagem.");
@@ -96,10 +100,9 @@ export default function Home() {
             }
         }
 
-        // ---- 🔥 Enviar dados do post para sua API ----
         const newPostData = {
             descricao: inputValue,
-            img: uploadedImageURL,  // 🔥 agora é a URL do Firebase
+            img: uploadedImageURL,
             nome: localStorage.getItem("nome"),
             perfil: localStorage.getItem("perfil")
         };
@@ -117,59 +120,101 @@ export default function Home() {
             setInputValue("");
             setImagePreview(null);
             setSelectedFile(null);
-
         } catch (error) {
             console.error("Erro ao enviar post:", error);
         }
     };
 
-
     const handleLike = async (postId) => {
-    const email = localStorage.getItem("email");
+        const email = localStorage.getItem("email");
+        try {
+            const res = await fetch(`${API_BASE_URL}/posts/${postId}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
 
-  try {
-    const res = await fetch(`${API_BASE_URL}/posts/${postId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Erro ao curtir");
 
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(data.message || "Erro ao curtir");
-
-    // 🔥 Atualizar curtidas instantaneamente no estado
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post.id === postId
-          ? { ...post, curtidas: post.curtidas + 1 } // incrementa só o post curtido
-          : post
-      )
-    );
-
-    console.log("Curtida registrada!");
-
-  } catch (error) {
-    console.error("Erro:", error);
-    alert(error.message);
-  }
+            setPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post.id === postId
+                        ? { ...post, curtidas: post.curtidas + 1 }
+                        : post
+                )
+            );
+            console.log("Curtida registrada!");
+        } catch (error) {
+            console.error("Erro:", error);
+            alert(error.message);
+        }
     };
 
     const fetchEventos = async () => {
-            try {
-                const response = await fetch("https://app-zxlyzt4g3q-uc.a.run.app/eventos");
-                if (!response.ok) throw new Error("Erro ao buscar eventos");
-                const data = await response.json();
-                setEventos(data);
-            } catch (error) {
-                console.error("Erro ao carregar eventos:", error);
+        try {
+            const response = await fetch(`${API_BASE_URL}/eventos`);
+            if (!response.ok) throw new Error("Erro ao buscar eventos");
+            const data = await response.json();
+            setEventos(data);
+        } catch (error) {
+            console.error("Erro ao carregar eventos:", error);
+        }
+    };
+
+    const fetchInscricoesUsuario = async () => {
+        const email = localStorage.getItem("email");
+        if (!email) return;
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/eventos/inscricoes/${email}`);
+            if (!response.ok) throw new Error("Erro ao buscar inscrições");
+            const inscricoes = await response.json();
+            const ids = new Set(inscricoes.map((insc) => insc.id));
+            setInscricoesUsuario(ids);
+        } catch (error) {
+            console.error("Erro ao carregar inscrições do usuário:", error);
+        }
+    };
+
+    const handleInscricao = async (idEvento) => {
+        const email = localStorage.getItem("email");
+        if (!email) {
+            alert("Usuário não autenticado.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/eventos/inscrever`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, idEvento }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setInscricoesUsuario((prev) => new Set([...prev, idEvento]));
+                alert("Inscrição realizada com sucesso!");
+            } else {
+                if (data.error === "Usuário já está inscrito neste evento.") {
+                    setInscricoesUsuario((prev) => new Set([...prev, idEvento]));
+                } else {
+                    alert(data.error || "Erro ao se inscrever.");
+                }
             }
+        } catch (error) {
+            console.error("Erro na inscrição:", error);
+            alert("Erro de conexão ao tentar se inscrever.");
+        }
     };
 
     useEffect(() => {
         fetchPosts();
         fetchSugeridos();
         fetchEventos();
+        fetchInscricoesUsuario();
+        fetchEmblems(); // 👈 incluído
     }, []);
 
     const handleAttachClick = () => fileInputRef.current.click();
@@ -177,16 +222,12 @@ export default function Home() {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
-
         setSelectedFile(file);
         setImagePreview(URL.createObjectURL(file));
     };
 
-    // ===== RESTANTE DO SEU CÓDIGO (layout, calendário etc.) =====
-
     const formatarData = (isoString) => {
         if (!isoString) return "Data não informada";
-
         try {
             const data = new Date(isoString);
             const dia = data.getDate().toString().padStart(2, "0");
@@ -221,7 +262,6 @@ export default function Home() {
 
         const totalCells = 42;
         const nextDaysCount = totalCells - (prevDays.length + currentDays.length);
-
         const nextDays = Array.from({ length: nextDaysCount }, (_, i) => ({
             day: i + 1,
             current: false,
@@ -244,8 +284,7 @@ export default function Home() {
 
     return (
         <div className="home-container no-scroll">
-
-            {/* ===== COLUNA ESQUERDA ===== */}
+            {/* COLUNA ESQUERDA */}
             <aside className="left-sidebar">
                 <div className="logo-header">
                     <Logo color="black" size={22} />
@@ -254,53 +293,60 @@ export default function Home() {
 
                 <div className="widget">
                     <h3>Sugeridos</h3>
-<ul className="suggested-list">
-    {sugeridos.length === 0 ? (
-        <p style={{ fontSize: "0.8rem", opacity: 0.6 }}>Nenhum sugerido</p>
-    ) : (
-        sugeridos.map((user, i) => (
-            <li key={i} className="suggest-item">
-                <img 
-                    src={user.perfil}
-                    alt={user.nome}
-                    className="suggest-avatar"
-                />
-
-                <div className="suggest-info">
-                    <strong>{user.nome}</strong>
-                    <span className="cargo">{user.cargo}</span>
+                    <ul className="suggested-list">
+                        {sugeridos.length === 0 ? (
+                            <p style={{ fontSize: "0.8rem", opacity: 0.6 }}>Nenhum sugerido</p>
+                        ) : (
+                            sugeridos.map((user, i) => (
+                                <li key={i} className="suggest-item">
+                                    <img 
+                                        src={user.perfil}
+                                        alt={user.nome}
+                                        className="suggest-avatar"
+                                    />
+                                    <div className="suggest-info">
+                                        <strong>{user.nome}</strong>
+                                        <span className="cargo">{user.cargo}</span>
+                                    </div>
+                                    <button className="btn-seguir">Seguir</button>
+                                </li>
+                            ))
+                        )}
+                    </ul>
                 </div>
 
-                <button className="btn-seguir">
-                    Seguir
-                </button>
-            </li>
-        ))
-    )}
-</ul>
-
-                </div>
-
+                {/* ✅ SEÇÃO ATUALIZADA DE EMBLEMAS */}
                 <div className="widget">
                     <h3>Emblemas</h3>
                     <div className="emblems-grid">
-                        {[...Array(8)].map((_, i) => (
-                            <div key={i} className="emblem-placeholder"></div>
-                        ))}
+                        {emblems.length > 0 ? (
+                            emblems.map((emblem, i) => (
+                                <div key={i} className="emblem-item">
+                                    <img 
+                                        src={emblem.iconeUrl || emblem.img || "/default-emblem.svg"} 
+                                        alt={emblem.nome || "Emblema"} 
+                                        className="emblem-icon" 
+                                    />
+                                     <div className="emblem-tooltip">{emblem.titulo}</div>
+                                </div>
+                            ))
+                        ) : (
+                            // Fallback: mostrar placeholders se ainda não carregou ou não tem emblemas
+                            [...Array(8)].map((_, i) => (
+                                <div key={i} className="emblem-placeholder"></div>
+                            ))
+                        )}
                     </div>
                 </div>
             </aside>
 
-            {/* ===== COLUNA CENTRAL ===== */}
+            {/* COLUNA CENTRAL */}
             <div className="center-column">
-
-                {/* INPUT DE POST */}
                 <div className="top-bar card">
                     <div className="chat-input-area">
                         <button className="attach-btn" onClick={handleAttachClick}>
                             <FaImage color="white" size={22} />
                         </button>
-
                         <input
                             type="file"
                             ref={fileInputRef}
@@ -308,7 +354,6 @@ export default function Home() {
                             accept="image/*"
                             onChange={handleFileChange}
                         />
-
                         <input
                             type="text"
                             placeholder="Compartilhe algo novo..."
@@ -316,12 +361,10 @@ export default function Home() {
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && handleSend()}
                         />
-
                         <button className="send-btn" onClick={handleSend}>
                             <Send color="black" size={22} />
                         </button>
                     </div>
-
                     {imagePreview && (
                         <div className="image-preview">
                             <img src={imagePreview} alt="Prévia" />
@@ -338,14 +381,12 @@ export default function Home() {
                     )}
                 </div>
 
-                {/* FEED */}
                 <main className="main-feed scrollable">
                     {posts.length === 0 ? (
                         <p className="no-posts">Nenhum post ainda...</p>
                     ) : (
                         posts.map((post) => (
                             <div key={post.id} className="feed-post card">
-                                
                                 <div className="post-header">
                                     <img 
                                         src={post.perfil || "https://via.placeholder.com/40"} 
@@ -356,36 +397,18 @@ export default function Home() {
                                         <div className="post-author">{post.nome || "Usuário"}</div>
                                     </div>
                                 </div>
-
-<div className="post-content">
-
-    {/* Se existe imagem → imagem primeiro */}
-    {post.img && (
-        <img
-            src={post.img}
-            alt="imagem do post"
-            className="post-img"
-        />
-    )}
-
-    {/* Descrição sempre abaixo da imagem (ou acima, se não tiver imagem) */}
-    {post.descricao && (
-        <p className="post-desc">{post.descricao}</p>
-    )}
-
-    {/* Data SEMPRE no final */}
-    <p className="post-date-text">{post.createdAt}</p>
-
-</div>
-
+                                <div className="post-content">
+                                    {post.img && (
+                                        <img src={post.img} alt="imagem do post" className="post-img" />
+                                    )}
+                                    {post.descricao && <p className="post-desc">{post.descricao}</p>}
+                                    <p className="post-date-text">{post.createdAt}</p>
+                                </div>
                                 <div className="post-actions">
                                     <button className="action-btn" onClick={() => handleLike(post.id)}>
                                         <FaRegHeart className="icon" />
                                         <span className="curtidas-count">{post.curtidas || 0}</span>
                                     </button>
-
-
-
                                     <img src="../../../dist/save.svg" alt="Salvar" className="icon icon-right" />
                                 </div>
                             </div>
@@ -394,41 +417,33 @@ export default function Home() {
                 </main>
             </div>
 
-            {/* ===== COLUNA DIREITA ===== */}
+            {/* COLUNA DIREITA */}
             <aside className="right-sidebar">
-<header className="right-header">
-
-    {/* ==== ÍCONE DE MENSAGENS COM TOOLTIP ==== */}
-    <div className="icon-wrapper">
-        <img
-            src="../../../public/message-square.svg"
-            alt="Mensagens"
-            className="icon"
-            onClick={() => window.location.href = "/chat"}
-            style={{ cursor: "pointer" }}
-        />
-        <span className="tooltip">Mensagens</span>
-    </div>
-
-    {/* ==== ÍCONE DE PERFIL COM TOOLTIP ==== */}
-    <div className="icon-wrapper">
-        <img
-            src="../../../public/account.svg"
-            alt="Perfil"
-            className="icon icon-right"
-            onClick={() => window.location.href = "/perfil"}
-            style={{ cursor: "pointer" }}
-        />
-        <span className="tooltip">Perfil</span>
-    </div>
-
-</header>
-
-
+                <header className="right-header">
+                    <div className="icon-wrapper">
+                        <img
+                            src="../../../public/message-square.svg"
+                            alt="Mensagens"
+                            className="icon"
+                            onClick={() => window.location.href = "/chat"}
+                            style={{ cursor: "pointer" }}
+                        />
+                        <span className="tooltip">Mensagens</span>
+                    </div>
+                    <div className="icon-wrapper">
+                        <img
+                            src="../../../public/account.svg"
+                            alt="Perfil"
+                            className="icon icon-right"
+                            onClick={() => window.location.href = "/perfil"}
+                            style={{ cursor: "pointer" }}
+                        />
+                        <span className="tooltip">Perfil</span>
+                    </div>
+                </header>
 
                 <div className="widget card calendario">
                     <h3>Calendário</h3>
-
                     <div className="calendar-header">
                         <FaChevronLeft
                             className="nav-arrow"
@@ -436,11 +451,9 @@ export default function Home() {
                                 setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1))
                             }
                         />
-
                         <span className="month-label">
                             {currentDate.toLocaleString("pt-BR", { month: "long", year: "numeric" })}
                         </span>
-
                         <FaChevronRight
                             className="nav-arrow"
                             onClick={() =>
@@ -448,19 +461,16 @@ export default function Home() {
                             }
                         />
                     </div>
-
                     <div className="calendar-grid">
                         {["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"].map((d) => (
                             <div key={d} className="cal-header">{d}</div>
                         ))}
-
                         {getCalendarDays(currentDate).map((d, i) => {
                             const isToday =
                                 d.current &&
                                 d.day === today.getDate() &&
                                 currentDate.getMonth() === today.getMonth() &&
                                 currentDate.getFullYear() === today.getFullYear();
-
                             return (
                                 <div
                                     key={i}
@@ -477,7 +487,6 @@ export default function Home() {
 
                 <div className="widget card eventos-proximos">
                     <h3>Eventos Próximos</h3>
-
                     <div className="event-item">
                         {eventos.length === 0 ? (
                             <p>Carregando eventos...</p>
@@ -488,28 +497,29 @@ export default function Home() {
                                     alt={eventos[currentEvento].titulo}
                                     className="evento-img"
                                 />
-
                                 <div className="evento-info">
                                     <strong>{eventos[currentEvento].titulo}</strong>
                                     <p>{formatarData(eventos[currentEvento].dia)}</p>
                                     <p>{eventos[currentEvento].localidade}</p>
-
-                                    <button className="btn-inscrever">Inscreva-se</button>
+                                    <button
+                                        className="btn-inscrever"
+                                        onClick={() => handleInscricao(eventos[currentEvento].id)}
+                                        disabled={inscricoesUsuario.has(eventos[currentEvento].id)}
+                                    >
+                                        {inscricoesUsuario.has(eventos[currentEvento].id) ? "Inscrito" : "Inscreva-se"}
+                                    </button>
                                 </div>
                             </div>
                         )}
                     </div>
-
                     <div className="event-nav">
                         <FaChevronLeft className="nav-arrow" onClick={prevEvento} />
-
                         {eventos.map((_, i) => (
                             <span
                                 key={i}
                                 className={`nav-dot ${i === currentEvento ? "active" : ""}`}
                             ></span>
                         ))}
-
                         <FaChevronRight className="nav-arrow" onClick={nextEvento} />
                     </div>
                 </div>

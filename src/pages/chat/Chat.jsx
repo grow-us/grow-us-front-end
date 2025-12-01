@@ -6,8 +6,8 @@ import Send from '../../componetes/Send'
 
 export default function Chat() {
 
-  const [usuarios, setUsuarios] = useState([]);     // lista de usuários da API
-  const [usuarioSelecionado, setUsuarioSelecionado] = useState(null); // usuario clicado
+  const [usuarios, setUsuarios] = useState([]);    
+  const [usuarioSelecionado, setUsuarioSelecionado] = useState(null);
 
   const [messages, setMessages] = useState([
     { type: 'received', text: 'Olá! Tudo bem?' },

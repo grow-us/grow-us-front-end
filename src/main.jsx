@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App.jsx';
 import Cadastro from './pages/cadastro/Cadastro.jsx';
-import Login from './pages/login/Login.jsx';
+import Login from './pages/login/login.jsx';
 import Chat from './pages/chat/Chat.jsx';
 import Skills from './pages/cadastro/Skills.jsx';
 import Home from './pages/home/Home.jsx'

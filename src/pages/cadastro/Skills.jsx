@@ -58,7 +58,7 @@ export default function Skills() {
       } catch (err) {
         console.error("Erro de conexão ao carregar skills:", err);
       } finally {
-        setLoading(false); // Finaliza o carregamento
+        setLoading(false); 
       }
     };
 
@@ -94,7 +94,6 @@ export default function Skills() {
     setSoftSkills((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Nova função para enviar as skills ao backend
   const handleConfirm = async () => {
     const email = localStorage.getItem("email");
 

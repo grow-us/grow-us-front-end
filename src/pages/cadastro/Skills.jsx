@@ -9,7 +9,7 @@ export default function Skills() {
 
   const [hardSkills, setHardSkills] = useState([]);
   const [softSkills, setSoftSkills] = useState([]);
-  const [loading, setLoading] = useState(true); // Novo estado para controle de carregamento
+  const [loading, setLoading] = useState(true); 
 
   const [hardInput, setHardInput] = useState("");
   const [softInput, setSoftInput] = useState("");

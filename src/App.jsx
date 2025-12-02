@@ -18,9 +18,8 @@ export default function App() {
         </div>
 
         <nav className="div-top">
-          <a href="#" className="texto-top">SOBRE</a>
-          <a href="#" className="texto-top">ACESSIBILIDADE</a>
-          <a href="#" className="texto-top">PREFERÊNCIAS</a>
+<Link to="/sobre" className="texto-top">SOBRE</Link>
+
         </nav>
       </header>
 

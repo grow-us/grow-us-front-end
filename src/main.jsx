@@ -12,6 +12,9 @@ import Comunidade from './pages/chat/Comunidade.jsx'
 import Interesses from './pages/cadastro/Interesses.jsx'
 import Perfil from './pages/profile/perfil.jsx'
 import Trilhas from './pages/trilhas/trilhas.jsx'
+import Sobre from './pages/sobre/sobre.jsx'
+
+
 
 
 
@@ -36,6 +39,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/interesses" element={<Interesses />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/trilhas" element={<Trilhas />} />
+        <Route path="/sobre" element={<Sobre />} />
+
 
 
 

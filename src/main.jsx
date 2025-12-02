@@ -11,6 +11,8 @@ import Home from './pages/home/Home.jsx'
 import Comunidade from './pages/chat/Comunidade.jsx'
 import Interesses from './pages/cadastro/Interesses.jsx'
 import Perfil from './pages/profile/perfil.jsx'
+import Trilhas from './pages/trilhas/trilhas.jsx'
+
 
 
 
@@ -29,10 +31,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/skills" element={<Skills />} />
-        <Route path="/comunidade" element={<Comunidade />} />
+        <Route path="/comunidades" element={<Comunidade />} />
         <Route path="/home" element={<Home />} />
         <Route path="/interesses" element={<Interesses />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path="/trilhas" element={<Trilhas />} />
+
 
 
 

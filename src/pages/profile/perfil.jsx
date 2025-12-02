@@ -300,7 +300,7 @@ export default function Perfil() {
                 <header className="right-header">
                     <div className="icon-wrapper">
                         <img 
-                            src="../../../public/message-square.svg" 
+                            src="/message-square.svg" 
                             alt="Mensagens" 
                             className="icon"
                             onClick={() => window.location.href = "/chat"}
@@ -310,14 +310,31 @@ export default function Perfil() {
                     </div>
                     <div className="icon-wrapper">
                         <img 
-                            src="../../../public/menu.svg" 
+                            src="/compass-svgrepo-com.svg" 
                             alt="Início" 
                             className="icon"
                             onClick={() => window.location.href = "/home"}
                             style={{ cursor: "pointer" }}
                         />
                         <span className="tooltip">Início</span>
+
+                        
                     </div>
+
+                    <div className="icon-wrapper">
+                        <img 
+                            src="/comunidades.svg" 
+                            alt="Comuniadade" 
+                            className="icon"
+                            onClick={() => window.location.href = "/comunidades"}
+                            style={{ cursor: "pointer" }}
+                        />
+                        <span className="tooltip">Comuniadades</span>
+
+                        
+                    </div>
+
+                    
                 </header>
 
                 <div className="widget card eventos-proximos-perfil">

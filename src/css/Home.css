@@ -194,27 +194,96 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 24px;
+    font-size: 40px;
     font-weight: bold;
     color: white;
     padding: 8px; /* Alinhamento visual */
     }
 
 
+    .trilhas-widget {
+    margin-top: 20px;
+}
+
+.trilhas-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.trilha-card {
+    background: #ffffff12;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #ffffff22;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.trilha-card:hover {
+    background: #ffffff1f;
+}
+
+.trilha-card h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #fff;
+}
+
+.trilha-card p {
+    margin: 3px 0 0;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.widget.sugestoes {
+    margin-top: -40px; /* ajuste o valor como quiser */
+}
+
+
+
+
+.widget.trilhas-widget {
+    margin-top: -10px; /* ajuste o valor como quiser */
+}
+
+
+.ver-trilhas-btn {
+    width: 100%;
+    margin-top: 14px;
+    background: #A100FF;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.ver-trilhas-btn:hover {
+    background: #7a00c0;
+}
+
+
+
 
   .logo-header span {
 
-    margin-left: -10px;
-    margin-top: 10px;
-  font-size: 32px;
-  font-weight: 700;
-  color: #A100FF;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+    margin-left: -27px;
+    margin-top: 19px;
+    font-size: 32px !important;
+    font-weight: 800;
+    color: #A100FF;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
     }
 
       .logo-header svg {
-    filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.8));
-      width: 50px;
+        margin-top: 12px;
+        margin-left: -14px;
+      filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.8));
+      width: 55px !important;
       height: auto;
       transition: transform 0.3s ease;
 
@@ -547,11 +616,13 @@ background: none !important;
 }
 
     .right-header .icon {
+
   background-color: transparent; /* remove qualquer fundo */
   box-shadow: none;              /* remove sombra, se houver */
 }
 
     .right-header {
+      padding-left: -40px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -757,6 +828,7 @@ background: none !important;
   font-family: "Outfit", sans-serif;
   backdrop-filter: blur(6px);
   transform-origin: right center;
+  z-index: 10;
 }
 
 /* Aparece ao passar o mouse */

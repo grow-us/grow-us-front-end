@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../../css/Home.css";
-import Logo from "../../componetes/Logo";
-import Send from "../../componetes/Send";
+import Logo from "../../componetes/Logo.jsx";
+import Send from "../../componetes/Send.jsx";
+
+
 import { 
     FaImage, FaRegHeart, FaRegCommentDots, FaChevronLeft, FaChevronRight 
 } from 'react-icons/fa';
@@ -288,10 +290,12 @@ export default function Home() {
             <aside className="left-sidebar">
                 <div className="logo-header">
                     <Logo color="black" size={22} />
-                    <span translate="no">GrowUs</span>
+                    <span translate="no">GrowUS</span>
                 </div>
 
-                <div className="widget">
+
+
+                <div className="widget sugestoes">
                     <h3>Sugeridos</h3>
                     <ul className="suggested-list">
                         {sugeridos.length === 0 ? (
@@ -338,6 +342,38 @@ export default function Home() {
                         )}
                     </div>
                 </div>
+
+                {/* ✅ WIDGET DE TRILHAS DE DESENVOLVIMENTO */}
+                <div className="widget trilhas-widget">
+                    <h3>Trilhas de Desenvolvimento</h3>
+
+                    <div className="trilhas-cards">
+                        <div className="trilha-card">
+                            <h4>🔵 Front-end</h4>
+                            <p>HTML, CSS, JavaScript, React</p>
+                        </div>
+
+                        <div className="trilha-card">
+                            <h4>🟣 Back-end</h4>
+                            <p>Node.js, APIs, Segurança</p>
+                        </div>
+
+                        <div className="trilha-card">
+                            <h4>🟢 Mobile</h4>
+                            <p>Kotlin, Android, Firebase</p>
+                        </div>
+                    </div>
+
+                    <button 
+                        className="ver-trilhas-btn"
+                        onClick={() => window.location.href = "/trilhas"}
+                    >
+                        Ver todas as trilhas →
+                    </button>
+                </div>
+
+
+
             </aside>
 
             {/* COLUNA CENTRAL */}
@@ -422,7 +458,7 @@ export default function Home() {
                 <header className="right-header">
                     <div className="icon-wrapper">
                         <img
-                            src="../../../public/message-square.svg"
+                            src="/message-square.svg"
                             alt="Mensagens"
                             className="icon"
                             onClick={() => window.location.href = "/chat"}
@@ -432,13 +468,23 @@ export default function Home() {
                     </div>
                     <div className="icon-wrapper">
                         <img
-                            src="../../../public/account.svg"
+                            src="/account.svg"
                             alt="Perfil"
                             className="icon icon-right"
                             onClick={() => window.location.href = "/perfil"}
                             style={{ cursor: "pointer" }}
                         />
                         <span className="tooltip">Perfil</span>
+                    </div>
+                        <div className="icon-wrapper">
+                        <img
+                            src="./comunidades.svg"
+                            alt="Comunidades"
+                            className="icon icon-right"
+                            onClick={() => window.location.href = "/comunidades"}
+                            style={{ cursor: "pointer" }}
+                        />
+                        <span className="tooltip">Comunidades</span>
                     </div>
                 </header>
 
@@ -501,13 +547,30 @@ export default function Home() {
                                     <strong>{eventos[currentEvento].titulo}</strong>
                                     <p>{formatarData(eventos[currentEvento].dia)}</p>
                                     <p>{eventos[currentEvento].localidade}</p>
-                                    <button
-                                        className="btn-inscrever"
-                                        onClick={() => handleInscricao(eventos[currentEvento].id)}
-                                        disabled={inscricoesUsuario.has(eventos[currentEvento].id)}
-                                    >
-                                        {inscricoesUsuario.has(eventos[currentEvento].id) ? "Inscrito" : "Inscreva-se"}
-                                    </button>
+                                    {inscricoesUsuario.has(eventos[currentEvento]?.id) ? (
+                                        <div 
+                                            className="btn-inscrito-texto" 
+                                            style={{ 
+                                                backgroundColor: 'transparent',
+                                                color: '#a0a0a0', 
+                                                textAlign: 'center',
+                                                cursor: 'default', 
+                                                fontWeight: 'bold',
+                                                fontSize: '1rem',
+                                                display: 'inline-block', 
+                                                minWidth: '150px'
+                                            }}
+                                        >
+                                            Inscrito
+                                        </div>
+                                    ) : (
+                                        <button
+                                            className="btn-inscrever"
+                                            onClick={() => handleInscricao(eventos[currentEvento]?.id)}
+                                        >
+                                            Inscreva-se
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         )}

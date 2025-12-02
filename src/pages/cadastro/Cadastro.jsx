@@ -15,7 +15,7 @@ export default function Cadastro() {
     e.preventDefault(); 
 
     try {
-      const response = await fetch("https://us-central1-grow-us-1.cloudfunctions.net/app/cadastrar", {
+      const response = await fetch("https://us-central1-grow-us-1.cloudfunctions.net/app/verificar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

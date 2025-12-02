@@ -293,6 +293,9 @@ export default function Home() {
                     <span translate="no">GrowUS</span>
                 </div>
 
+                    <div className="left-widgets scrollable-widgets">
+
+
 
 
                 <div className="widget sugestoes">
@@ -312,7 +315,11 @@ export default function Home() {
                                         <strong>{user.nome}</strong>
                                         <span className="cargo">{user.cargo}</span>
                                     </div>
-                                    <button className="btn-seguir">Seguir</button>
+                                    {user.email === localStorage.getItem("email") ? (
+                                        <h4 className="btn-voce" >Você</h4>
+                                    ) : (
+                                        <button className="btn-seguir">Seguir</button>
+                                    )}
                                 </li>
                             ))
                         )}
@@ -372,6 +379,7 @@ export default function Home() {
                     </button>
                 </div>
 
+                   </div>
 
 
             </aside>

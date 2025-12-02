@@ -237,9 +237,39 @@
     opacity: 0.7;
 }
 
-.widget.sugestoes {
-    margin-top: -40px; /* ajuste o valor como quiser */
+.btn-voce{
+    background: none;   /* remove qualquer fundo */
+    font-weight: bold;  /* deixa em negrito */
 }
+
+
+.left-widgets.scrollable-widgets {
+  margin-top: -40px;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    padding-right: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+
+    scrollbar-width: thin;
+    scrollbar-color: #7b61ff #2a1a5e;
+}
+
+.left-widgets.scrollable-widgets::-webkit-scrollbar {
+    width: 8px;
+}
+
+.left-widgets.scrollable-widgets::-webkit-scrollbar-thumb {
+    background-color: #7b61ff;
+    border-radius: 4px;
+}
+
+.left-widgets.scrollable-widgets::-webkit-scrollbar-track {
+    background: #2a1a5e;
+}
+
 
 
 
